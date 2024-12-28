@@ -50,15 +50,16 @@ const WallOfPeace = () => {
                         signedUsers.map((person: any, index) => {
                             return (
                                 person.usrName.toLowerCase().includes(search) ?
-                                    <TouchableOpacity key={index} onPress={()=>moveNext(person.userID)}>
+                                    <TouchableOpacity key={index} >
                                         <View  style={{ flex: 1, flexDirection: 'row', backgroundColor: Colors.lightBackground, margin: 5, padding: 10, borderRadius: 10 }}>
                                             <View style={{ flex: 1, flexDirection: 'column', padding: 5 }}>
-                                                <Text>Number: {index+1}</Text>
+                                                {/* <Text>Number: {index+1}</Text> */}
                                                 <Text>Name: {person.usrName}</Text>
+                                                <Text>Country: {person.residency}</Text>
                                             </View>
                                             <View style={{ flexDirection: 'column', padding: 5 }}>
                                                 <Text>Date: {person.treatyDate}</Text>
-                                                <Text>Country: {person.residency}</Text>
+                                                
                                             </View>
                                         </View>
                                     </TouchableOpacity>

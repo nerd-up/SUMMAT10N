@@ -66,7 +66,7 @@ const Home = ({ navigation }: any) => {
 	},[]);
     return (
         <View style={{ flex: 1,backgroundColor:Colors.lightBackground }}>
-            <View
+            {/* <View
 					style={{
 						margin: 5,
 						flexDirection: 'row',
@@ -94,11 +94,11 @@ const Home = ({ navigation }: any) => {
                         <Image source={require('../assets/icons/images.png')} style={{
 							height: 30, width
 								: 30,
-                            tintColor:Colors.primary
+                            tSintColor:Colors.primary
 						}} />
 						</TouchableOpacity>
 					</View>
-				</View>
+				</View> */}
             <Feed />
         </View>
     );

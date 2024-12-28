@@ -12,7 +12,7 @@ type ScholarBannerProps = {
 export default function ScholarBanner(props: ScholarBannerProps) {
     return (
         <View style={{ alignItems: 'center',height:350 }}>
-            <Image source={require('../assets/clear.png')}/>
+            <Image source={require('../assets/sum.png')}/>
         </View>
     );
 }
@@ -22,14 +22,14 @@ export  function ScholarMiniBanner(props: any) {
         <View style={{ 
             alignItems: 'center', 
             justifyContent: 'center', // Vertically centers the content
-            height: 500 
+            height: 150 
         }}>
             <Image 
-                source={require('../assets/clear.png')} 
+                source={require('../assets/sum.png')} 
                 style={{
                     resizeMode: 'contain', // Ensures the image fits properly
-                    height: 200, // Adjust based on your desired size
-                    width: 200,  // Adjust based on your desired size
+                    height: 150, // Adjust based on your desired size
+                    width: 150,  // Adjust based on your desired size
                 }}
             />
         </View>
