@@ -2659,6 +2659,27 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-webview (13.12.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - React-nativeconfig (0.76.5)
   - React-NativeModulesApple (0.76.5):
     - glog
@@ -3164,6 +3185,7 @@ DEPENDENCIES:
   - react-native-html-to-pdf (from `../node_modules/react-native-html-to-pdf`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -3305,6 +3327,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-nativeconfig:
     :path: "../node_modules/react-native/ReactCommon"
   React-NativeModulesApple:
@@ -3440,6 +3464,7 @@ SPEC CHECKSUMS:
   react-native-html-to-pdf: 4c5c6e26819fe202971061594058877aa9b25265
   react-native-image-picker: 8d06080ecb33269e77e0728f1fd8a16f2f5aad07
   react-native-safe-area-context: 16c455e62ad9dae353281f8099a4f93800adabe6
+  react-native-webview: 47c9d892756ec3930810f2b539e732c01858e1c9
   React-nativeconfig: 565ebf4340d9ede95b523f0e3640f48286985ef5
   React-NativeModulesApple: ea083a4663dae82c99fe4c2186b11504ac4147e1
   React-perflogger: ceb97dd4e5ca6ff20eebb5a6f9e00312dcdea872
@@ -3481,6 +3506,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 7548e4449365bf0ef60db4aefe58abff37fcabec
 
-PODFILE CHECKSUM: 928400a5d6baf6959dfbe21f0c662035bf6c289c
+PODFILE CHECKSUM: 532c907fdff855c168422d0a3c9ba832f5322f78
 
 COCOAPODS: 1.16.2

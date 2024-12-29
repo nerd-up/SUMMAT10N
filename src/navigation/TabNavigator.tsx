@@ -24,6 +24,7 @@ import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import { icons } from '../assets/icons';
+import Donor from '../screens/Donor';
 
 
 const Tab = createBottomTabNavigator();
@@ -31,6 +32,7 @@ const Tab = createBottomTabNavigator();
 const routeIconUrls: { [key: string]: any } = {
     'Home': require('../assets/icons/home.png'),
     'Friends': require('../assets/icons/friends.png'),
+    'Donor': require('../assets/icons/friends.png'),
     'Notifications': require('../assets/icons/bell-ring.png'),
     'UserProfile': require('../assets/icons/user.png'),
     'SignForPeace': require('../assets/icons/world-peace.png'),
@@ -136,6 +138,11 @@ function ScholarTabs() {
                     :
                     <Tab.Screen name="SignForPeace" component={SignForPeace} options={{ headerShown: false }} />
             }
+            <Tab.Screen name="Donor" component={Donor} options={{ title: "Donor levels", headerShown: true, tabBarShowLabel: false,      headerTitleStyle: {
+                    color: Colors.primary, fontSize: 30
+                }, headerStyle: {
+                    backgroundColor: Colors.lightBackground
+                } }} />
             {/* <Tab.Screen name="Friends" component={Friends} options={{ title: "Friends", headerShown: false, tabBarShowLabel: false }} /> */}
             {/* <Tab.Screen name="Notifications" component={Notifications} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
             {/* <Tab.Screen name="UserProfile" component={UserProfile}

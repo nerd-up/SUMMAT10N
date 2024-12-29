@@ -24,6 +24,7 @@ target 'SUMMAT10N' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+  # pod  'react-native-webview', :path => PROJECT_PATH + 'react-native-webview'
 
   target 'SUMMAT10NTests' do
     inherit! :complete
