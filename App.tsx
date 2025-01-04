@@ -16,8 +16,6 @@ const App = () => {
           <ScholarStack />
          </NavigationContainer>
       </AlertNotificationRoot>
-      
-     
     </MenuProvider>
     
   )

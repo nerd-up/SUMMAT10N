@@ -8,8 +8,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { getPostLikes, fetchPosts, posts } from '../services/DataService';
+// import Icon from 'react-native-vector-icons/Ionicons';
+import { getPostLikes, fetchPosts } from '../services/DataService';
 import FeedBox from '../components/FeedBox';
 
 import Colors from '../theme/ScholarColors';
@@ -25,7 +25,6 @@ import { getUserId } from '../utils/Auth';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import useUserProfileStore, { useLikesStore, usePostsStore } from '../zustand/UserProfileStore';
-import Friends from './Friends';
 
 const UserProfile = ({ navigation }: any) => {
 	const [friends, setFriends]: any = useState([]);
@@ -161,7 +160,8 @@ const UserProfile = ({ navigation }: any) => {
 						<TouchableOpacity
 							style={{ backgroundColor: 'white', position: 'absolute', top: 0, right: 0, margin: 10 }}
 							onPress={() => navigation.push('EditProfile', { userProfile })}>
-							<Icon name="create-outline" size={25} color={Colors.primary} />
+								<Text>Edit</Text>
+							{/* <Icon name="create-outline" size={25} color={Colors.primary} /> */}
 						</TouchableOpacity>
 						<Text style={{ color: 'white', textAlign: 'center', fontSize: 50 }}>{userProfile.residency}</Text>
 						<View style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: 'transparent', height: 120, width: 120, bottom: -60, left: '50%', marginLeft: -60, borderRadius: 50 }}>
@@ -276,7 +276,8 @@ const UserProfile = ({ navigation }: any) => {
 					</TouchableOpacity>
 					<View style={{ marginLeft: 5 }}>
 						<TouchableOpacity>
-							<Icon name="image" size={35} color={Colors.primary} />
+							<Text>Image</Text>
+							{/* <Icon name="image" size={35} color={Colors.primary} /> */}
 						</TouchableOpacity>
 					</View>
 				</View>

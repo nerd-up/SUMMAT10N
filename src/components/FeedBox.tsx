@@ -7,6 +7,7 @@ import PostBottom from './PostBottom';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { icons } from '../assets/icons';
 
 type FeedBoxProps = {
     key: number,
@@ -86,7 +87,8 @@ export default function FeedBox(props: FeedBoxProps) {
                 <View style={styles.avatarSection}>
                     {
                         props.avatar === " " || props.avatar == null ?
-                            <Icon name="person-circle-outline" size={30} color={Colors.primary} /> :
+                        <Image source={icons.chat} style={styles.postHeaderProfile} />    
+                        :
                             <Image source={{ uri: props.avatar }} style={styles.postHeaderProfile} />
                     }
                 </View>

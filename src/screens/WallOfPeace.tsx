@@ -35,10 +35,14 @@ const WallOfPeace = () => {
     const moveNext=(userID:any)=>{
         navigation.navigate('User',{userID:userID});
     }
+
     return (
         <SafeAreaView style={{backgroundColor:Colors.background}}>
             <BackBtn />
-            <ScholarMiniBanner text='Wall of Peace' />
+            {/* <ScholarMiniBanner text='Wall of Peace' /> */}
+            <TouchableOpacity onPress={()=>navigation.navigate('PostStack')}  style={stylings.postBtn}>
+                <Text>Make a Post</Text>
+            </TouchableOpacity>
             <View>
                 <TextInput style={stylings.searchBar} value={search} onChangeText={(text) => setSearch(text)} placeholder='search for person'>
 
@@ -114,6 +118,15 @@ const stylings = StyleSheet.create({
     },
     classmateIcon: {
         borderRadius: 50,
+    },
+    postBtn:{
+   backgroundColor:Colors.primary,
+   width:'80%',
+   marginLeft:'10%',
+   padding:10,
+   borderRadius:20,
+   alignItems:'center'
+
     },
     classmateSchool: {
         color: Colors.text,

@@ -2,10 +2,10 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Bubble, GiftedChat, QuickReplies, User } from 'react-native-gifted-chat';
 import { SafeAreaView, StyleSheet, Platform, KeyboardAvoidingView, Image, Text, TouchableOpacity, View } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../theme/ScholarColors';
 import auth from '@react-native-firebase/auth';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { icons } from '../assets/icons';
 interface IMessage {
   _id: string | number;
   text: string;
@@ -84,7 +84,8 @@ const ChatRoom = () => {
       headerTitle: () => <Text style={style.username}>{userProfile.usrName}</Text>,
       headerRight: () => (
         <TouchableOpacity >
-          <Icon name='ellipsis-vertical-outline' size={25} color={Colors.primary} />
+          <Image source={icons.chat} style={style.avatar} />
+          {/* <Icon name='ellipsis-vertical-outline' size={25} color={Colors.primary} /> */}
         </TouchableOpacity>
       ),
     });

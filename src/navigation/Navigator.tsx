@@ -22,6 +22,8 @@ import ChatRoom from '../screens/ChatRoom';
 import { Text } from 'react-native';
 import AuthLoading from '../screens/AuthLoading';
 import Settings from '../screens/Settings';
+import PostStack from './PostStack';
+import UpdatePlan from '../screens/UpdatePlan';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,9 +42,11 @@ function ScholarStack() {
             <Stack.Screen name="Chats" component={Chats} options={{headerTitle:() => <Text style={{fontSize:25,color:'black',fontWeight:'bold'}}>Chats</Text>,headerStyle:{backgroundColor:'transparent'}}}/>
             <Stack.Screen name="ChatRoom" component={ChatRoom} options={{headerBackVisible:false}}/>
             <Stack.Screen name="User" component={User}  options={{headerShown:false}}/>
+            <Stack.Screen name="PostStack" component={PostStack}  options={{headerShown:false}}/>
             <Stack.Screen name="Post" component={Post} options={{title:"Make a post",headerStyle:{
                 backgroundColor:Colors.lightBackground,
             }}}/>
+            <Stack.Screen name="UpdatePlan" component={UpdatePlan} options={{headerBackVisible:false}} />
             {/* <Stack.Screen name="Profile" component={Profile} /> */}
       <Stack.Screen name="Settings" component={Settings} />
         </Stack.Navigator>

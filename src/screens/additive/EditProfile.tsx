@@ -9,7 +9,6 @@
 import React, { useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,6 +21,7 @@ import Colors from '../../theme/ScholarColors';
 import { uploadImage } from '../../services/UploadFunctions';
 import { launchImageLibrary } from 'react-native-image-picker';
 import useUserProfileStore from '../../zustand/UserProfileStore';
+import { icons } from '../../assets/icons';
 
 /**
  * @description This screen is an additive screen
@@ -99,17 +99,8 @@ const EditProfile = () => {
                 }}>
                 {
                     profilePic.length == 0 ?
-                        <Icon
-                            name='person'
-                            size={90}
-                            color={Colors.primary}
-                            style={{
-                                borderColor: Colors.text,
-                                borderWidth: 1,
-                                borderRadius: 150,
-                                padding: 15,
-                            }}
-                        />
+                    <Image style={styles.profilePictur} source={icons.chat} />
+
                         :
                         <Image style={styles.profilePictur} source={{ uri: profilePic }} />
                 }

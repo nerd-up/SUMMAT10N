@@ -1,21 +1,20 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
-import Icon from 'react-native-vector-icons/Entypo'
-import Colors from '../theme/ScholarColors'
+// import Icon from 'react-native-vector-icons/Entypo'
 const PopUp = (props: any) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.crossButtonStyle} onPress={props.func}>
-                <Icon name="circle-with-cross" color={Colors.text} size={30} />
+                {/* <Icon name="circle-with-cross" color={Colors.text} size={30} /> */}
             </TouchableOpacity>
             <View style={styles.messageBoxStyle}>
                 <View style={styles.textContainer}>
                 <Text>Message Classmate</Text>
-                    <Icon name="message" color={Colors.text} size={30} />
+                    {/* <Icon name="message" color={Colors.text} size={30} /> */}
                 </View>
                 <View style={styles.textContainer}>
                     <Text>Remove Classmate</Text>
-                    <Icon name="remove-user" color={Colors.text} size={30} />
+                    {/* <Icon name="remove-user" color={Colors.text} size={30} /> */}
                 </View>
             </View>
         </View>

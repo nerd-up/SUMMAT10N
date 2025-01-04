@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+import { icons } from '../assets/icons';
 
 const AllFriends = () => {
     const navigation:any=useNavigation();
@@ -79,7 +80,7 @@ const AllFriends = () => {
                                                         friend.profilePic !== "" ?
                                                             <Image source={{ uri: friend.profilePic }} style={{ height: 60, width: 60, borderRadius: 50 }}></Image>
                                                             :
-                                                            <Icon name='person' size={65} color={Colors.primary} />
+                                                            <Image source={icons.chat} style={{ height: 60, width: 60, borderRadius: 50 }}></Image>
                                                     }
                                                 </View>
                                                 <View style={stylings.classmateTexts}>
@@ -99,7 +100,7 @@ const AllFriends = () => {
         <Menu>
           <MenuTrigger>
             {/* <TouchableHighlight> */}
-              <Icon name='ellipsis-vertical-outline' size={25} />
+             More
             {/* </TouchableHighlight> */}
           </MenuTrigger>
           <MenuOptions>
