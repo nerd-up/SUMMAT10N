@@ -6,6 +6,7 @@ import { getUsers } from '../services/DataService'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native'
+import { icons } from '../assets/icons'
 const FindFriends = () => {
     const navigation: any = useNavigation();
     const [users, setUsers] = useState([]);
@@ -77,7 +78,8 @@ const FindFriends = () => {
                                                         user.profilePic && user.profilePic !== " " ?
                                                             <Image source={{ uri: user.profilePic }} style={{ height: 60, width: 60, borderRadius: 50 }}></Image>
                                                             :
-                                                            <Icon name='person' size={55} color={Colors.primary} style={{ height: 60, width: 60, borderRadius: 50 }}/>
+                                                            <Image source={icons.chat} style={{ height: 60, width: 60, borderRadius: 50 }}></Image>
+            
                                                     }
                                                 </View>
                                                 <View style={stylings.classmateTexts}>

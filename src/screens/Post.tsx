@@ -1,15 +1,14 @@
 import { View, Text, Image, TouchableOpacity, TextInput, Alert, Platform, KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from '../styles/Styles'
-import Icon from 'react-native-vector-icons/Ionicons'
 
-import Colors from '../theme/ScholarColors'
 import { useNavigation } from '@react-navigation/native'
 import { uploadImage } from '../services/UploadFunctions'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { setInPost } from '../services/DataService'
 import { getUserId } from '../utils/Auth'
 import useUserProfileStore from '../zustand/UserProfileStore'
+import { icons } from '../assets/icons'
 
 export default function Post(navigation: any) {
     const userName = useUserProfileStore(store => store.usrName)
@@ -105,7 +104,8 @@ export default function Post(navigation: any) {
                 <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5 }}>
                     <View style={styles.avatarSection}>
                         {userProfilePic == " " ?
-                            <Icon name={'person'} size={45} color={Colors.primary} style={{ borderRadius: 50, padding: 5 }} /> :
+                            <Image source={icons.chat} style={[styles.avatarSection, { height: 50, width: 50 }]} />
+                          :
                             <Image source={{ uri: userProfilePic }} style={[styles.avatarSection, { height: 50, width: 50 }]} />
                         }
                     </View>
@@ -134,7 +134,8 @@ export default function Post(navigation: any) {
                         selectedImage === '' ? null :
                             <View style={{ flex: 1 }}>
                                 <TouchableOpacity style={styles.cancelButtonStyle} onPress={() => setSelectedImage('')}>
-                                    <Icon name="close-outline" color={'red'} size={40} />
+                                    {/* <Icon name="close-outline" color={'red'} size={40} /> */}
+                                <Text>Close</Text>
                                 </TouchableOpacity>
                                 <Image source={{ uri: selectedImage }} style={styles.selectedImageStyle}></Image>
                             </View>
@@ -148,7 +149,8 @@ export default function Post(navigation: any) {
                     </View>
                     <View style={styles.imageIconContainer}>
                         <TouchableOpacity onPress={openImagePicker}>
-                            <Icon name="images-outline" size={30} color={Colors.primary} />
+                            <Text>Image</Text>
+                            {/* <Icon name="images-outline" size={30} color={Colors.primary} /> */}
                         </TouchableOpacity>
                     </View>
                 </View>

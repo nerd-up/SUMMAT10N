@@ -6,16 +6,12 @@
  * @last modified 14/10/2023
 */
 
-import React, { useState } from 'react';
-import { Alert, Image, Text, TouchableOpacity, View,ScrollView, Platform } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React from 'react';
+import { Alert, View, Platform } from 'react-native';
+// import Icon from 'react-native-vector-icons/Ionicons';
 
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { posts, setInProfile } from '../services/DataService';
-import styles from '../styles/Styles';
-import { Fonts } from '../Theme/Fonts';
-import Colors from '../Theme/ScholarColors';
+import { useNavigation } from '@react-navigation/native';
+import { setInProfile } from '../services/DataService';
 import { uploadImage } from '../services/UploadFunctions';
 import { launchImageLibrary } from 'react-native-image-picker';
 import useUserProfileStore from '../zustand/UserProfileStore';

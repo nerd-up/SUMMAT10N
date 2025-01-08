@@ -5,6 +5,7 @@ import Colors from '../theme/ScholarColors'
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import { icons } from '../assets/icons';
 const FriendRequests = () => {
     const navigation: any = useNavigation();
     const [requests, setRequests]: any = useState([]);
@@ -135,7 +136,8 @@ const FriendRequests = () => {
                                                 <View style={stylings.classmateIcon}>
                                                     {
                                                         friend.profilePic !== ' ' ?
-                                                            <Image source={{ uri: friend.profilePic }} style={{ height: 60, width: 60, borderRadius: 50 }}></Image> : <Icon name='person' size={65} color={Colors.primary} />
+                                                            <Image source={{ uri: friend.profilePic }} style={{ height: 60, width: 60, borderRadius: 50 }}></Image> : 
+                                                            <Image source={icons.chat} style={{ height: 60, width: 60, borderRadius: 50 }}></Image>
                                                     }
 
                                                 </View>

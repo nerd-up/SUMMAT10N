@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { View, TextInput, ScrollView, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import Colors from '../theme/ScholarColors'
+import React, { useEffect, useState } from 'react';
+import { View, TextInput, ScrollView, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import Colors from '../theme/ScholarColors';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { QuickReplies, User } from 'react-native-gifted-chat';
+import { icons } from '../assets/icons';
 interface IMessage {
   _id: string | number;
   text: string;
@@ -83,7 +83,7 @@ const Chats = () => {
                             friend.profilePic !== "" ?
                               <Image source={{ uri: friend.profilePic }} style={{ height: 50, width: 50, borderRadius: 50 }}></Image>
                               :
-                              <Icon name='person' size={65} color={Colors.primary} />
+                              <Image source={icons.chat} style={{ height: 50, width: 50, borderRadius: 50 }}></Image>
                           }
                         </View>
                         <View style={stylings.classmateTexts}>
@@ -98,7 +98,7 @@ const Chats = () => {
                     </TouchableOpacity>
                     <View>
                       <TouchableOpacity>
-                        <Icon name='ellipsis-vertical-outline' size={25} />
+                        {/* <Icon name='ellipsis-vertical-outline' size={25} /> */}
                       </TouchableOpacity>
                     </View>
                   </View>

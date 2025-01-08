@@ -7,8 +7,7 @@
  */
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { getPostLikes, fetchPosts, posts } from '../services/DataService';
+import { getPostLikes, fetchPosts } from '../services/DataService';
 import FeedBox from '../components/FeedBox';
 
 import Colors from '../theme/ScholarColors';
@@ -18,11 +17,10 @@ import { useIsFocused, useRoute } from '@react-navigation/native';
 import FriendBox from '../components/FriendBox';
 import MissionLine from '../components/MissionLine';
 import { getProfile } from '../services/DataService';
-import firestore from '@react-native-firebase/firestore'
-import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore';
 import styles from '../styles/Styles';
 import { getUserId } from '../utils/Auth';
-import useUserProfileStore, { useLikesStore, usePostsStore } from '../zustand/UserProfileStore';
+import { useLikesStore, usePostsStore } from '../zustand/UserProfileStore';
 
 const User = ({ navigation }: any) => {
     const isFocused = useIsFocused();
@@ -280,7 +278,8 @@ const User = ({ navigation }: any) => {
                                 </TouchableOpacity>
                                 <View style={{ marginLeft: 5 }}>
                                     <TouchableOpacity>
-                                        <Icon name="image" size={35} color={Colors.primary} />
+                                        <Text>Image</Text>
+                                        {/* <Icon name="image" size={35} color={Colors.primary} /> */}
                                     </TouchableOpacity>
                                 </View>
                             </View>
