@@ -8,18 +8,18 @@ const Donor = () => {
     return (
         <View style={styles.container}>
 
-            <View style={styles.card}>
+            {/* <View style={styles.card}>
                 <Text style={styles.headingTextStyle}>Bronze Badge</Text>
                 <Text style={styles.textStyle}>$0.99</Text>
-            </View>
+            </View> */}
             <View style={styles.card}>
                 <Text style={styles.headingTextStyle}>Silver Badge </Text>
                 <Text style={styles.textStyle}>$4.99</Text>
             </View>
-            <View style={styles.card}>
+            {/* <View style={styles.card}>
                 <Text style={styles.headingTextStyle}>Gold Badge</Text>
                 <Text style={styles.textStyle}>$9.99</Text>
-            </View>
+            </View> */}
             {/* <WebView source={{uri:'https://youtu.be/-xthzy1PxTA?si=UH43RB7H_nPbO44w'}} style={{flex:1}}></WebView> */}
         </View>
     )

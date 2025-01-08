@@ -12,7 +12,7 @@ type ScholarBannerProps = {
 export default function ScholarBanner(props: ScholarBannerProps) {
     return (
         <View style={{ alignItems: 'center',height:350 }}>
-            <Image source={require('../assets/sum.png')}/>
+            <Image source={require('../assets/unify.png')}/>
         </View>
     );
 }

@@ -66,7 +66,7 @@ const Home = ({ navigation }: any) => {
 	},[]);
     return (
         <View style={{ flex: 1,backgroundColor:Colors.lightBackground }}>
-            {/* <View
+            <View
 					style={{
 						margin: 5,
 						flexDirection: 'row',
@@ -98,7 +98,7 @@ const Home = ({ navigation }: any) => {
 						}} />
 						</TouchableOpacity>
 					</View>
-				</View> */}
+				</View>
             <Feed />
         </View>
     );
