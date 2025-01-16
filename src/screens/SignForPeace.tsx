@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Image, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Button, Image,ScrollView, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import ScholarBanner, { ScholarMiniBanner } from '../components/UnifyBanner'
 import Colors from '../theme/ScholarColors'
 import useUserProfileStore from '../zustand/UserProfileStore'
@@ -24,10 +24,13 @@ const SignForPeace = () => {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', padding: 20 }}>
+        <ScrollView style={{ padding: 20 }}
+        showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom:20}}
+        >
             <ScholarMiniBanner text='Peace Treaty' />
             
-            <KeyboardAvoidingView>
+            <View>
                 <View style={{ flex: 1, alignItems: 'center', marginTop: 150 }}>
                     <Text style={{ textAlign: 'center', fontSize: 28, }}>
                         I "{userProfile.usrName}" Sign This treaty for world peace to end war and make the world a better place
@@ -46,8 +49,8 @@ const SignForPeace = () => {
                         </View>
                     </TouchableOpacity>
                 </View>
-            </KeyboardAvoidingView>
-        </View>
+            </View>
+        </ScrollView>
     )
 }
 

@@ -55,9 +55,6 @@ export default function LoginForm(props: LoginFormProps) {
                     disableLoading();
                     getProfile(userId)
                         .then(async (profile: any) => {
-
-                            console.log(profile);
-
                             // if could not find a profile for anonomous
                             if (profile === undefined) {
                                 console.log("Added profile");

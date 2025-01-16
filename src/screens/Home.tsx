@@ -13,12 +13,17 @@ import Feed from '../components/Feed';
 import Colors from '../theme/ScholarColors';
 import Toast from 'react-native-toast-message';
 import useUserProfileStore from '../zustand/UserProfileStore';
+import { getProfile } from '../services/DataService';
+import { getUserId } from '../utils/Auth';
 
 
 
 
 const Home = ({ navigation }: any) => {
 	const userProfile: any = useUserProfileStore(store => store)
+
+	console.log(JSON.stringify(userProfile,null,2),"hommmmeee");
+	
 	const displayWelcomeMessage=()=>{
 		Toast.show({
 			type: 'success',
@@ -42,6 +47,11 @@ const Home = ({ navigation }: any) => {
 		// }
 		// PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
 		displayWelcomeMessage();
+		getProfile(getUserId())
+		.then(profile=>{
+     console.log(JSON.stringify(profile),"yeh leh");
+		})
+
 		// messaging().onNotificationOpenedApp(remoteMessage => {
 		// 	console.log('Notification caused app to open from background state:', JSON.stringify(remoteMessage));
 		// 	// Navigate to the desired screen
