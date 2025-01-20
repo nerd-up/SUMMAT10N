@@ -29,19 +29,13 @@ const UpdatePlan = ({navigation}:any) => {
       };
     
       const onNext = async () => {
-      
         if (!selectedPlan) {
           Alert.alert('Error', 'Please select a plan to proceed.');
           return;
         }
-      
         try {
-        
-            console.log('Purchasing Plan:', selectedPlan);
-
             // Purchase the selected plan
             const purchase = await requestPurchase({sku:selectedPlan.productId});
-         
           if (purchase) {
             showSucess('Purchase Successful', `Subscribed to: ${selectedPlan.productId}`);
             navigation.navigate('Post');

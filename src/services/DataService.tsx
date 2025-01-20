@@ -111,7 +111,7 @@ export function setInProfile(
     console.log("usrName:", usrName);
     console.log("signed:", signed);
     firestore()
-        .collection('Users')
+        .collection('users')
         .doc(getUserId())
         .set(
             {
@@ -150,7 +150,7 @@ export const getUsers = async () => {
 };
 export function fetchSignedUsers(callback:any) {
     return firestore()
-        .collection('Users')
+        .collection('users')
         .where('signed', '!=', "") // Fetch users where 'signed' is not an empty string
         .onSnapshot(
             querySnapshot => {
@@ -173,9 +173,8 @@ export function saveSignatures(
     signed: string
 ) {
     const date=new Date().toLocaleDateString();
-    console.log("signed:", signed);
     firestore()
-        .collection('Users')
+        .collection('users')
         .doc(getUserId())
         .update(
             {
@@ -184,7 +183,7 @@ export function saveSignatures(
             },
         )
         .then(() => {
-            console.log('success!');
+            console.log('success signed!');
         })
         .catch(err => {
             console.log("i got an error");
@@ -228,11 +227,10 @@ export function setInPost(userID: string, image: string, description: string, ti
 export const getProfile = (userID: string) => {
     return new Promise((resolve, reject) => {
         firestore()
-            .collection('Users')
+            .collection('users')
             .doc(userID)
             .onSnapshot(documentSnapshot => {
-                console.log('User exists: ', documentSnapshot.exists);
-
+               
                 if (documentSnapshot.exists) {
                     resolve(documentSnapshot.data());
                 } else {

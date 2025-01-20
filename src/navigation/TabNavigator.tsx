@@ -5,7 +5,7 @@
  * @last modified 9/20/2023
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import auth from '@react-native-firebase/auth';
@@ -25,6 +25,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import { icons } from '../assets/icons';
 import Donor from '../screens/Donor';
+import { getProfile } from '../services/DataService';
+import { getUserId } from '../utils/Auth';
 
 
 const Tab = createBottomTabNavigator();
@@ -50,6 +52,7 @@ function TabBarIcon({ iconName, focused }: any) {
 
 function ScholarTabs() {
     const userProfile: any = useUserProfileStore(store => store)
+    const setProfileData = useUserProfileStore(store => store.setProfileData)
     const navigation: any = useNavigation();
     const signOut = () => {
         Alert.alert(
@@ -101,6 +104,18 @@ function ScholarTabs() {
             { cancelable: false }
         );
     }
+
+    useEffect(()=>{
+     getProfile(getUserId())
+     .then((profile: any) => {
+        console.log("lo pharro",profile);
+        
+        setProfileData(profile);
+      })
+      .catch(error => {
+        console.error('Errffor :', error);
+      });
+    },[])
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({

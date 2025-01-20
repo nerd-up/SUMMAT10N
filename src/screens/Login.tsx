@@ -13,9 +13,12 @@ import auth from '@react-native-firebase/auth';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 
 import firestore from '@react-native-firebase/firestore';
+import useUserProfileStore from '../zustand/UserProfileStore';
+import { getUserId } from '../utils/Auth';
 
 function Login({ navigation }: any) {
     const [timeLeft, setTimeLeft] = useState("");
+    const setProfileData = useUserProfileStore(store => store.setProfileData)
 
     async function onAppleButtonPress() {
         try {
@@ -24,7 +27,7 @@ function Login({ navigation }: any) {
                 requestedOperation: appleAuth.Operation.LOGIN,
                 requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
             });
-            console.log("appleAuthRequestResponse:",appleAuthRequestResponse);
+            console.log("appleAuthRequestResponse:",JSON.stringify(appleAuthRequestResponse,null,2));
             // Ensure Apple returned a user identityToken
             if (!appleAuthRequestResponse.identityToken) {
                 throw new Error('Apple Sign-In failed - no identity token returned');
@@ -35,13 +38,14 @@ function Login({ navigation }: any) {
 
             // Create a Firebase credential from the Apple response
             const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
-            console.log("appleCredential:",appleCredential);
-
+           
             // Sign in with the Firebase credential
             const userCredential = await auth().signInWithCredential(appleCredential);
-            console.log(userCredential);
+            console.log(JSON.stringify(userCredential,null,2),"these are dataaas");
             // Retrieve user information
             const uid  = userCredential.user.uid;
+            console.log(uid);
+            
             const fullName = appleAuthRequestResponse.fullName?.givenName || 'User';
             const email = userCredential.user.email || appleAuthRequestResponse.email || '';
             const userDocRef = firestore().collection('users').doc(uid);
@@ -53,10 +57,21 @@ function Login({ navigation }: any) {
                     userID: uid,
                     profilePic: '',
                     residency: '',
-                    usrName: fullName,
+                    usrName: email?.split('@')?.shift(),
+                    email:email,
                     signed: '',
                     createdAt: firestore.FieldValue.serverTimestamp(),
                 });
+                setProfileData({
+                    bio: 'no bio',
+                    userID: uid,
+                    profilePic: '',
+                    residency: '',
+                    usrName: email?.split('@')?.shift(),
+                    email:email,
+                    signed: '',
+                    createdAt: firestore.FieldValue.serverTimestamp(),
+                })
                 navigation.navigate('Splash', { uid });
                 console.log('User profile created successfully in Firestore');
             } else {
