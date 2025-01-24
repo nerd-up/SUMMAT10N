@@ -153,11 +153,7 @@ function ScholarTabs() {
                     :
                     <Tab.Screen name="SignForPeace" component={SignForPeace} options={{ headerShown: false }} />
             }
-            <Tab.Screen name="Donor" component={Donor} options={{ title: "Donor levels", headerShown: true, tabBarShowLabel: false,      headerTitleStyle: {
-                    color: Colors.primary, fontSize: 30
-                }, headerStyle: {
-                    backgroundColor: Colors.lightBackground
-                } }} />
+            <Tab.Screen name="Donor" component={Donor}  />
             {/* <Tab.Screen name="Friends" component={Friends} options={{ title: "Friends", headerShown: false, tabBarShowLabel: false }} /> */}
             {/* <Tab.Screen name="Notifications" component={Notifications} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
             {/* <Tab.Screen name="UserProfile" component={UserProfile}

@@ -58,7 +58,7 @@ const WallOfPeace = () => {
                                         <View  style={{ flex: 1, flexDirection: 'row', backgroundColor: Colors.lightBackground, margin: 5, padding: 10, borderRadius: 10 }}>
                                             <View style={{ flex: 1, flexDirection: 'column', padding: 5 }}>
                                                 {/* <Text>Number: {index+1}</Text> */}
-                                                <Text>Name: {person.usrName}</Text>
+                                                <Text>Name: {person?.signed}</Text>
                                                 <Text>Country: {person.residency}</Text>
                                             </View>
                                             <View style={{ flexDirection: 'column', padding: 5 }}>

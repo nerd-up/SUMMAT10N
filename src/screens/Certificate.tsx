@@ -84,7 +84,7 @@ const Certificate = () => {
             </View>
             <View style={{ marginTop: 50,justifyContent:'center' }}>
                 <Text style={{ fontSize: 28, color: Colors.text, textAlign: 'center', justifyContent: 'center' }}>
-                    Certificate Of Peace of {userProfile.treatyDate}, "{userProfile.usrName}" has Signed
+                    Certificate Of Peace of {userProfile.treatyDate}, "{userProfile?.signed}" has Signed
                     The treaty for world Peace
                 </Text>
                 <Text style={{ textDecorationLine:'underline',fontSize: 28, color: Colors.text, textAlign: 'center', justifyContent: 'center' }}>
