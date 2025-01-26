@@ -102,23 +102,11 @@ export default function Post(navigation: any) {
         <View style={[styles.container, { margin: 5 }]}>
             <KeyboardAvoidingView>
                 <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5 }}>
-                    <View style={styles.avatarSection}>
-                        {userProfilePic == " " ?
-                            <Image source={icons.chat} style={[styles.avatarSection, { height: 50, width: 50 }]} />
-                          :
-                            <Image source={{ uri: userProfilePic }} style={[styles.avatarSection, { height: 50, width: 50 }]} />
-                        }
+                    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{textAlign:'center',fontSize:18}}>Topic Of the Moth</Text>
                     </View>
                     <View style={[styles.adminSection, { marginTop: 10, flexDirection: 'column' }]}>
-                        <Text style={{ fontSize: 20, textAlign: 'center' }}>{userName}</Text>
-                        <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center' }}>
-                            <TouchableOpacity onPress={isPrivate === true ? () => setIsPrivate(false) : () => setIsPrivate(true)}>
-                                <View style={isPrivate === false ? styles.unFilledCircle : styles.filledCircle}>
-
-                                </View>
-                            </TouchableOpacity>
-                            <Text style={{ margin: 2, textAlign: 'center' }}>private</Text>
-                        </View>
+                        
                     </View>
                 </View>
                 <View>
