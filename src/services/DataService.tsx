@@ -133,7 +133,7 @@ export function setInProfile(
 }
 export const getUsers = async () => {
     try {
-        const usersRef = firestore().collection('Users');
+        const usersRef = firestore().collection('users');
         const snapshot = await usersRef.get();
 
         const users: any = [];
@@ -148,20 +148,20 @@ export const getUsers = async () => {
         throw error;
     }
 };
-export function fetchSignedUsers(callback:any) {
+export function fetchSignedUsers(callback: any) {
     return firestore()
         .collection('users')
         .where('signed', '!=', "") // Fetch users where 'signed' is not an empty string
         .onSnapshot(
             querySnapshot => {
-                const users:any = [];
+                const users: any = [];
                 querySnapshot.forEach(documentSnapshot => {
                     users.push({
                         ...documentSnapshot.data(),
                         id: documentSnapshot.id
                     });
                 });
-                console.log("first:",users)
+                console.log("first:", users)
                 callback(users);
             },
             error => {
@@ -172,14 +172,14 @@ export function fetchSignedUsers(callback:any) {
 export function saveSignatures(
     signed: string
 ) {
-    const date=new Date().toLocaleDateString();
+    const date = new Date().toLocaleDateString();
     firestore()
         .collection('users')
         .doc(getUserId())
         .update(
             {
                 signed: signed,
-                treatyDate:date,
+                treatyDate: date,
             },
         )
         .then(() => {
@@ -189,34 +189,41 @@ export function saveSignatures(
             console.log("i got an error");
         });
 }
-
-export function setInPost(userID: string, image: string, description: string, time: string, status: string) {
-
-    const postCollection = firestore().collection('AllPosts').doc(userID).collection('Posts');
-    const newPostDoc = postCollection.doc(); // This creates a new document reference with an auto-generated ID
-    const newPostId = newPostDoc.id;
-
-    firestore()
-        .collection('AllPosts')
-        .doc(userID)
-        .collection('Posts')
-        .doc(newPostId)
-        .set({
-            userID,
+export async function setInPost(post: {
+    adminId: string;
+    text: string;
+    time: string;
+    topic: string;
+}) {
+    const { adminId, text, time, topic } = post;
+    try {
+        const postCollection = firestore().collection('AllPosts').doc(adminId).collection('Posts');
+        const currentMonth = new Date().getMonth();
+        // Check if a post already exists for the current month
+        const existingPostSnapshot = await postCollection
+            .where('month', '==', currentMonth)
+            .limit(1)
+            .get();
+        if (!existingPostSnapshot.empty) {
+            throw new Error('You can only make one post per month.');
+        }
+        const newPostDoc = postCollection.doc(); // Auto-generate document ID
+        const newPostId = newPostDoc.id;
+        await newPostDoc.set({
+            adminId,
             postId: newPostId,
-            image,
-            description,
+            text,
             time,
-            status,
-        })
-        .then(() => {
-            console.log('success!');
-        })
-        .catch(err => {
-            console.log(err);
+            topic,
+            month: currentMonth, // Store the current month for tracking
         });
-}
 
+        console.log('Post successfully saved!');
+    } catch (error) {
+        console.error('Error saving post:', error);
+        throw error;
+    }
+}
 /**
  *
  * @param {string} userID
@@ -230,7 +237,7 @@ export const getProfile = (userID: string) => {
             .collection('users')
             .doc(userID)
             .onSnapshot(documentSnapshot => {
-               
+
                 if (documentSnapshot.exists) {
                     resolve(documentSnapshot.data());
                 } else {

@@ -15,6 +15,7 @@ type FeedBoxProps = {
     avatar?: string,
     admin?: string,
     time?: string,
+    residency?: string,
     description?: string,
     picture?: string,
     postID: string,
@@ -22,7 +23,7 @@ type FeedBoxProps = {
 }
 
 export default function FeedBox(props: FeedBoxProps) {
-    const navigation:any=useNavigation();
+    const navigation: any = useNavigation();
     const [isLikedByCurrentUser, setIsLikedByCurrentUser] = useState(false);
     const [likes, setLikes] = useState<any[]>([]);
     const [comments, setComments] = useState<any[]>([]);
@@ -56,24 +57,25 @@ export default function FeedBox(props: FeedBoxProps) {
             .doc(props.postID)
             .collection("Comments")
             .onSnapshot(snapshot => {
+            
                 const commentsArray = snapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
                 }));
                 setComments(commentsArray);
-                console.log("commentsArray",commentsArray);
+                console.log("commentsArray", commentsArray);
             });
     }
     useEffect(() => {
         fetchAllComments();
-        console.log("first",comments);
+        console.log("first", comments);
         fetchAllLikes();
     }, []);
 
     return (
         <View style={styles.post} >
             <View style={styles.postAdmin}>
-                <View style={{ left: 350, top: 10, zIndex: 2, position: 'absolute' }}>
+                <View style={{ right: 0, top: 10, zIndex: 2, position: 'absolute' }}>
                     <TouchableOpacity>
                         <View>
                             <Image source={require('../assets/icons/dots.png')} style={{
@@ -83,21 +85,16 @@ export default function FeedBox(props: FeedBoxProps) {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={()=>navigation.navigate('User',{userID:props.userID})}>
-                <View style={styles.avatarSection}>
-                    {
-                        props.avatar === " " || props.avatar == null ?
-                        <Image source={icons.chat} style={styles.postHeaderProfile} />    
-                        :
-                            <Image source={{ uri: props.avatar }} style={styles.postHeaderProfile} />
-                    }
-                </View>
-                </TouchableOpacity>
-                <View style={styles.adminSection}>
-                    <Text style={styles.postAdminName}>{props.admin}</Text>
+                <View style={{ left: 0, top: 10, zIndex: 2, position: 'absolute' }}>
                     <Text style={{ color: 'gray' }}>
                         {new Date(props.time).toLocaleDateString()}
                     </Text>
+                </View>
+                <View style={[styles.adminSection, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>
+                    <Text style={styles.postAdminName}>{props.admin}</Text>
+                    <Text style={[styles.postAdminName, { color: 'gray' }]}>{props.residency}</Text>
+                    <Text style={[styles.postAdminName, { color: 'gray' }]}>{props.topic}</Text>
+                    
                 </View>
             </View>
             <View style={styles.postDescription}>
@@ -109,10 +106,10 @@ export default function FeedBox(props: FeedBoxProps) {
                 props.picture ?
                     <View style={styles.postHolder}>
                         <Image source={{ uri: props.picture }} style={{ resizeMode: 'cover', width: '100%', height: '100%' }} />
-                    </View> 
+                    </View>
                     : null
             }
-            <PostBottom postID={props.postID} userID={props.userID} likes={likes} isLikedByCurrentUser={isLikedByCurrentUser} LikeIcon={LikeIcon} fetchAllLikes={fetchAllLikes} comments={comments}/>
+            <PostBottom postID={props.postID} userID={props.userID} likes={likes} isLikedByCurrentUser={isLikedByCurrentUser} LikeIcon={LikeIcon} fetchAllLikes={fetchAllLikes} comments={comments} />
         </View>
     );
 }

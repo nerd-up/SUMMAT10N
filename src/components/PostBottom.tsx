@@ -46,40 +46,28 @@ const PostBottom = (props: PostBottomProps) => {
             return;
         }
     }
-    
+
     return (
         <View>
             <View style={styles.postBottom}>
-                <View style={{ width: '50%', alignItems: 'center', borderRightWidth: 1, borderColor: 'gray' }}>
+                <View style={{ width: '100%', backgroundColor: Colors.primary, alignItems: 'center', borderColor: 'gray' }}>
                     <TouchableOpacity style={styles.actionBtn} onPress={handleLikePost}>
                         <Image source={LikeIcon} style={{
                             height: 20, width: 20,
-                            tintColor: Colors.primary,
+                            tintColor: 'white',
                         }} />
-                    </TouchableOpacity>
-                </View>
-                <View style={{ width: '50%', alignItems: 'center' }}>
-                    <TouchableOpacity style={styles.actionBtn} onPress={() => setShowComments(!showComments)}>
-                        <Image source={require('../assets/icons/speech-bubble.png')} style={{
-                            height: 20, width: 20,
-                            tintColor: Colors.primary
-                        }} />
+                        <Text style={{ fontSize: 16, color: 'white' }}>
+                        {likes.length} Vote{likes?.length>1&&'\'s'}
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
-            <View style={styles.postBottom}>
+            {/* <View style={styles.postBottom}>
                 <View style={{ width: '50%', alignItems: 'center' }}>
-                    <Text style={{ color: Colors.text, padding: 2 }}>
-                        {likes.length}
-                    </Text>
+
                 </View>
-                <View style={{ width: '50%', alignItems: 'center' }}>
-                    <Text style={{ color: Colors.text, padding: 2 }}>
-                        {props.comments.length}
-                    </Text>
-                </View>
-            </View>
+            </View> */}
             {showComments && (
                 <View style={{ padding: 5, borderTopWidth: 1 }}>
                     {
@@ -88,10 +76,10 @@ const PostBottom = (props: PostBottomProps) => {
                                 <View key={index} style={{ padding: 10, flexDirection: 'row' }}>
                                     <Image source={{ uri: comment.profilePic }} style={{ height: 40, width: 40, borderRadius: 50 }}></Image>
                                     <View style={{ justifyContent: 'center', marginLeft: 10, backgroundColor: Colors.lightBackground, flex: 1, padding: 10, borderRadius: 20 }}>
-                                        <Text style={{fontSize:18,color:'black'}}>
+                                        <Text style={{ fontSize: 18, color: 'black' }}>
                                             {comment.usrName}
                                         </Text>
-                                        <Text style={{marginLeft:2,color:Colors.text}}>
+                                        <Text style={{ marginLeft: 2, color: Colors.text }}>
                                             {comment.comment}
                                         </Text>
                                     </View>
@@ -100,7 +88,7 @@ const PostBottom = (props: PostBottomProps) => {
                         })
                     }
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <TextInput onChangeText={(txt) => setComment(txt)} value={comment} style={{ borderWidth: 1, flex: 1, borderRadius: 20, marginRight: 10, borderColor: 'gray' ,padding:Platform.OS==='ios'?10:0}} placeholder='Type comment' />
+                        <TextInput onChangeText={(txt) => setComment(txt)} value={comment} style={{ borderWidth: 1, flex: 1, borderRadius: 20, marginRight: 10, borderColor: 'gray', padding: Platform.OS === 'ios' ? 10 : 0 }} placeholder='Type comment' />
                         <TouchableOpacity style={{ backgroundColor: Colors.primary, padding: 10, borderRadius: 10 }} onPress={sentComment}>
                             <Text style={{ fontWeight: 'bold', color: 'white' }}>Send</Text>
                         </TouchableOpacity>

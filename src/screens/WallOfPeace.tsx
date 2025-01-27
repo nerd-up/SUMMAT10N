@@ -20,18 +20,6 @@ const WallOfPeace = () => {
     const goBack = () => {
         navigation.goBack();
     }
-    const persons = [
-        { luckyNumber: 1, name: "John Doe", treatyDate: "2023-05-15", country: "USA" },
-        { luckyNumber: 2, name: "Alice Smith", treatyDate: "2022-09-20", country: "Canada" },
-        { luckyNumber: 3, name: "Mohammed Ali", treatyDate: "2024-01-10", country: "Pakistan" },
-        { luckyNumber: 4, name: "Emma Brown", treatyDate: "2023-12-05", country: "UK" },
-        { luckyNumber: 5, name: "Chen Wei", treatyDate: "2022-07-30", country: "China" },
-        { luckyNumber: 6, name: "Maria Garcia", treatyDate: "2024-03-18", country: "Spain" },
-        { luckyNumber: 7, name: "Yuki Tanaka", treatyDate: "2023-11-22", country: "Japan" },
-        { luckyNumber: 8, name: "Anna Kowalski", treatyDate: "2024-02-28", country: "Poland" },
-        { luckyNumber: 9, name: "Ahmed Hassan", treatyDate: "2022-10-03", country: "Egypt" },
-        { luckyNumber: 10, name: "Olga Ivanova", treatyDate: "2023-08-14", country: "Russia" }
-    ];
     const moveNext=(userID:any)=>{
         navigation.navigate('User',{userID:userID});
     }
@@ -59,10 +47,10 @@ const WallOfPeace = () => {
                                             <View style={{ flex: 1, flexDirection: 'column', padding: 5 }}>
                                                 {/* <Text>Number: {index+1}</Text> */}
                                                 <Text>Name: {person?.signed}</Text>
-                                                <Text>Country: {person.residency}</Text>
+                                                <Text>Country: {person?.residency}</Text>
                                             </View>
                                             <View style={{ flexDirection: 'column', padding: 5 }}>
-                                                <Text>Date: {person.treatyDate}</Text>
+                                                <Text>Date: {person?.treatyDate}</Text>
                                                 
                                             </View>
                                         </View>

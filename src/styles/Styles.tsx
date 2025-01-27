@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         width: '100%',
         overflow: 'hidden',
         backgroundColor: Colors.background,
-        padding: 6,
+        padding: 10,
         marginTop: 6,
     },
 
@@ -212,18 +212,19 @@ const styles = StyleSheet.create({
     postBottom: {
         backgroundColor: 'transparent',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         width: 'auto',
-        padding: 2,
-        paddingLeft: 10,
-        paddingRight: 10,
+        marginTop:10,
         borderBottomRightRadius: 5,
         borderBottomLeftRadius: 5,
-
     },
 
   actionBtn: {
-    padding: 2,
+    padding: 8,
+    alignItems:'center',
+    justifyContent:'center',
+    flexDirection:'row',
+    gap:10,
   },
   //post page styling
   postHeaderProfile:{
@@ -248,10 +249,11 @@ const styles = StyleSheet.create({
     margin: 5
    },
    postButtonStyle:{ 
+    
     backgroundColor: Colors.primary, 
     margin: 5,
     textAlign: 'center',
-    padding: 5,
+    padding: 15,
     borderRadius: 10 
   },
   postButtonContainer:{
@@ -269,7 +271,31 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width - 30, 
     height: (Dimensions.get('screen').height) / 4 
   },
-  cancelButtonStyle:{ position: 'absolute', zIndex: 99 }
+  cancelButtonStyle:{ position: 'absolute', zIndex: 99 },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black background
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5, // For Android shadow
+  },
+  modalButton: {
+    backgroundColor: Colors.primary,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
 });
 
 export default styles;

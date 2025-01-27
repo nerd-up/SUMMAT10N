@@ -16,10 +16,6 @@ import Toast from 'react-native-toast-message';
 import useUserProfileStore from '../zustand/UserProfileStore';
 import { getProfile } from '../services/DataService';
 import { getUserId } from '../utils/Auth';
-
-
-
-
 const Home = ({ navigation }: any) => {
 	const userProfile: any = useUserProfileStore(store => store)
 	const [hasUsrName, setHasUsrName] = useState(true);
@@ -158,6 +154,7 @@ const Home = ({ navigation }: any) => {
 			</View>
 			<Feed />
 		</View>
+		
 	);
 };
 const styles=StyleSheet.create({

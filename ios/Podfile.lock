@@ -2570,6 +2570,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-get-random-values (1.11.0):
+    - React-Core
   - react-native-html-to-pdf (0.12.0):
     - React-Core
   - react-native-image-picker (7.2.3):
@@ -3009,6 +3011,12 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNIap (12.16.1):
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - ReactCommon/turbomodule/core
   - RNReanimated (3.16.6):
     - DoubleConversion
     - glog
@@ -3182,6 +3190,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
   - react-native-html-to-pdf (from `../node_modules/react-native-html-to-pdf`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -3221,6 +3230,7 @@ DEPENDENCIES:
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNIap (from `../node_modules/react-native-iap`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -3321,6 +3331,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-get-random-values:
+    :path: "../node_modules/react-native-get-random-values"
   react-native-html-to-pdf:
     :path: "../node_modules/react-native-html-to-pdf"
   react-native-image-picker:
@@ -3399,6 +3411,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNIap:
+    :path: "../node_modules/react-native-iap"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -3461,6 +3475,7 @@ SPEC CHECKSUMS:
   React-logger: 697873f06b8ba436e3cddf28018ab4741e8071b6
   React-Mapbuffer: c79216258c659d70cdebaf76f8c110cc46dce8db
   React-microtasksnativemodule: 8d918db5d7c4526de2a0a4692d878a21b338c3f0
+  react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-html-to-pdf: 4c5c6e26819fe202971061594058877aa9b25265
   react-native-image-picker: 8d06080ecb33269e77e0728f1fd8a16f2f5aad07
   react-native-safe-area-context: 16c455e62ad9dae353281f8099a4f93800adabe6
@@ -3501,6 +3516,7 @@ SPEC CHECKSUMS:
   RNFBFirestore: 6db2eb460dd774c0a28210fcee2c80a4afbd54dc
   RNFBStorage: 9c28439fb8d407f188a6a9689184e70af8fa2d74
   RNGestureHandler: 15ee1ab573a954c92641877ca946e2680f2e58da
+  RNIap: ac7cf20cd7f9edba5265af5cd77d23ecfec8cab6
   RNReanimated: 77a04017cdf54b9da500ccefde56d9d15b8ddff6
   RNScreens: 8ae716a7e26b9ecee7f2856e6ff47b8e7e253ee8
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
@@ -3508,4 +3524,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 532c907fdff855c168422d0a3c9ba832f5322f78
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.15.2
