@@ -46,7 +46,6 @@ const PostBottom = (props: PostBottomProps) => {
             return;
         }
     }
-
     return (
         <View>
             <View style={styles.postBottom}>
@@ -62,12 +61,6 @@ const PostBottom = (props: PostBottomProps) => {
                     </TouchableOpacity>
                 </View>
             </View>
-
-            {/* <View style={styles.postBottom}>
-                <View style={{ width: '50%', alignItems: 'center' }}>
-
-                </View>
-            </View> */}
             {showComments && (
                 <View style={{ padding: 5, borderTopWidth: 1 }}>
                     {

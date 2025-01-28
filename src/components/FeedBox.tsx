@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Image, Text, View } from 'react-native';
 import styles from '../styles/Styles';
-import Colors from '../theme/ScholarColors';
 import PostBottom from './PostBottom';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { icons } from '../assets/icons';
-
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+import Report from './Report';
+import { deletePost } from '../services/DataService';
 type FeedBoxProps = {
     key: number,
     navigation?: any,
@@ -21,15 +20,20 @@ type FeedBoxProps = {
     postID: string,
     userID: string
 }
-
 export default function FeedBox(props: FeedBoxProps) {
     const navigation: any = useNavigation();
     const [isLikedByCurrentUser, setIsLikedByCurrentUser] = useState(false);
     const [likes, setLikes] = useState<any[]>([]);
     const [comments, setComments] = useState<any[]>([]);
-
+    const [isReportOpen,setIsReportOpen]=useState(false);
     const [LikeIcon, setLikeIcon] = useState(require('../assets/icons/like.png'));
-
+    const setReportOpen=()=>{
+        if(isReportOpen){
+            setIsReportOpen(false);
+        }else{
+            setIsReportOpen(true);
+        }
+    }
     const fetchAllLikes = () => {
         firestore()
             .collection("AllPosts")
@@ -57,7 +61,7 @@ export default function FeedBox(props: FeedBoxProps) {
             .doc(props.postID)
             .collection("Comments")
             .onSnapshot(snapshot => {
-            
+
                 const commentsArray = snapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
@@ -71,19 +75,28 @@ export default function FeedBox(props: FeedBoxProps) {
         console.log("first", comments);
         fetchAllLikes();
     }, []);
+    useEffect(()=>{
 
+    },[isReportOpen]);
     return (
         <View style={styles.post} >
+            <Report postDetails={props} setIsVisible={setIsReportOpen} isVisible={isReportOpen}/>
             <View style={styles.postAdmin}>
-                <View style={{ right: 0, top: 10, zIndex: 2, position: 'absolute' }}>
-                    <TouchableOpacity>
-                        <View>
-                            <Image source={require('../assets/icons/dots.png')} style={{
-                                height: 20, width: 20,
-                                tintColor: Colors.primary
-                            }} />
-                        </View>
-                    </TouchableOpacity>
+                <View style={{ top: 10, right: 0, zIndex: 2, position: 'absolute' }}>
+                    <Menu>
+                        <MenuTrigger>
+                            <Image source={require('../assets/icons/dots.png')} style={{ height: 20, width: 20, tintColor: 'black' }} />
+                        </MenuTrigger>
+                        <MenuOptions>
+                            {auth().currentUser?.uid === props?.userID ?
+                                <>
+                                    {/* <MenuOption onSelect={() => navigation.navigate('EditPost', { postID: props.postID })} text='Edit Post' /> */}
+                                    <MenuOption onSelect={() => deletePost(props?.userID, props?.postID)} text='Delete Post' />
+                                </>
+                                : <MenuOption onSelect={()=>setReportOpen()} text='Report Post' />
+                            }
+                        </MenuOptions>
+                    </Menu>
                 </View>
                 <View style={{ left: 0, top: 10, zIndex: 2, position: 'absolute' }}>
                     <Text style={{ color: 'gray' }}>
@@ -94,7 +107,7 @@ export default function FeedBox(props: FeedBoxProps) {
                     <Text style={styles.postAdminName}>{props.admin}</Text>
                     <Text style={[styles.postAdminName, { color: 'gray' }]}>{props.residency}</Text>
                     <Text style={[styles.postAdminName, { color: 'gray' }]}>{props.topic}</Text>
-                    
+
                 </View>
             </View>
             <View style={styles.postDescription}>

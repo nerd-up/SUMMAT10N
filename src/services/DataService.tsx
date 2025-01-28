@@ -10,6 +10,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth'
 
 import { getUserId } from '../utils/Auth';
+import { showError, showSucess } from '../utils/utility';
 /**
  * Dummy data
  */
@@ -246,6 +247,20 @@ export const getProfile = (userID: string) => {
 
             })
     });
+}
+export function deletePost(userID: string, postId:string) {
+    firestore()
+        .collection('AllPosts')
+        .doc(userID)
+        .collection('Posts')
+        .doc(postId)
+        .delete()
+        .then(() => {
+            showSucess('Success','Post Deleted successfully');
+        })
+        .catch(err => {
+            showError('Failed to upload', err);
+        });
 }
 export const deletePostLike = async (postID: string, userID: string) => {
     const currentUser: any = auth().currentUser?.uid;
