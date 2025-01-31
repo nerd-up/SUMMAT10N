@@ -16,10 +16,12 @@ import Toast from 'react-native-toast-message';
 import useUserProfileStore from '../zustand/UserProfileStore';
 import { getProfile } from '../services/DataService';
 import { getUserId } from '../utils/Auth';
+import { getAvailablePurchases, initConnection } from 'react-native-iap';
 const Home = ({ navigation }: any) => {
 	const userProfile: any = useUserProfileStore(store => store)
 	const [hasUsrName, setHasUsrName] = useState(true);
 	const [usrName,setUserName]=useState('');
+	const [isSubscribed,setIsSubscribed]=useState(false);
 	const [visible,setVisible]=useState(false);
 	console.log(JSON.stringify(userProfile, null, 2), "hommmmeee");
 
@@ -62,6 +64,40 @@ const Home = ({ navigation }: any) => {
 			setHasUsrName(false);
 		}
 	}
+	
+    const restorePurchases = async () => {
+       
+        try {
+          const purchases = await getAvailablePurchases();
+
+          const activePurchase = purchases.find(
+            (purchase) =>
+              purchase.productId === 'Ate12'
+          );
+          if (activePurchase) {
+            setIsSubscribed(true);
+            // setLoading(false)
+            // showSucess('Subscription Restored', `Active Subscription: ${activePurchase.productId}`);
+          }
+          
+        } catch (error) {
+          console.error('Error restoring purchases:', error);
+        }
+      };
+
+      useEffect(() => {
+        const initializeIAP = async () => {
+          try {
+            await initConnection();
+            restorePurchases();
+          } catch (error) {
+            console.error('IAP initialization error:', error);
+          }
+        };
+    
+        initializeIAP();
+      }, []);
+
 	useEffect(() => {
 		// if(Platform.OS==='ios'){
 		// 	requestUserPermission();
@@ -90,10 +126,6 @@ const Home = ({ navigation }: any) => {
 		//   });
 
 		// return unsubscribe;
-
-
-
-
 	}, []);
 
 	return (
@@ -135,7 +167,7 @@ const Home = ({ navigation }: any) => {
 							: 30
 					}} />
 				</View>
-				<TouchableOpacity style={{ flex: 1 }} onPress={() => navigation.push('Post', { userProfile })}>
+				<TouchableOpacity style={{ flex: 1 }} onPress={() => navigation.navigate('PostStack',{userProfile})}>
 					<View style={{ flex: 1, width: '80%', alignItems: 'center', justifyContent: 'center' }}>
 						<Text
 							style={{ fontSize: 20 }}

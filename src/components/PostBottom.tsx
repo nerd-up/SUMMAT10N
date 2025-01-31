@@ -4,6 +4,9 @@ import styles from '../styles/Styles';
 import Colors from '../theme/ScholarColors';
 import { setPostLike, deletePostLike, setPostComment } from '../services/DataService'; // Import the like functions
 import useUserProfileStore from '../zustand/UserProfileStore';
+import { getUserId } from '../utils/Auth';
+import { showError } from '../utils/utility';
+import { useNavigation } from '@react-navigation/native';
 
 type PostBottomProps = {
     postID: string,
@@ -12,10 +15,12 @@ type PostBottomProps = {
     comments: any[],
     isLikedByCurrentUser: boolean,
     LikeIcon: any,
-    fetchAllLikes: () => void
+    fetchAllLikes: () => void,
+    isSubscribed?: boolean,
 }
 
 const PostBottom = (props: PostBottomProps) => {
+    const navigation:any=useNavigation();
     const userProfile: any = useUserProfileStore(store => store)
     const [comment, setComment] = useState('');
     const [isLikedByCurrentUser, setIsLikedByCurrentUser] = useState(props.isLikedByCurrentUser);
@@ -29,6 +34,14 @@ const PostBottom = (props: PostBottomProps) => {
     }, [props.likes, props.isLikedByCurrentUser]);
 
     const handleLikePost = async () => {
+        if(!props.isSubscribed){
+      showError('Failed','You must make a donation to vote any post');
+      setTimeout(() => {
+        navigation.navigate('UpdatePlan');
+      }, 1000);
+      navigation
+      return;
+        }
         if (isLikedByCurrentUser) {
             setLikeIcon(require('../assets/icons/like.png'));
             await deletePostLike(props.postID, props.userID);
@@ -49,8 +62,8 @@ const PostBottom = (props: PostBottomProps) => {
     return (
         <View>
             <View style={styles.postBottom}>
-                <View style={{ width: '100%', backgroundColor: Colors.primary, alignItems: 'center', borderColor: 'gray' }}>
-                    <TouchableOpacity style={styles.actionBtn} onPress={handleLikePost}>
+                <TouchableOpacity disabled={props.userID===getUserId()} onPress={handleLikePost} style={{ width: '100%', backgroundColor: Colors.primary, alignItems: 'center', borderColor: 'gray' }}>
+                    <View style={styles.actionBtn}>
                         <Image source={LikeIcon} style={{
                             height: 20, width: 20,
                             tintColor: 'white',
@@ -58,8 +71,8 @@ const PostBottom = (props: PostBottomProps) => {
                         <Text style={{ fontSize: 16, color: 'white' }}>
                         {likes.length} Vote{likes?.length>1&&'\'s'}
                         </Text>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
             </View>
             {showComments && (
                 <View style={{ padding: 5, borderTopWidth: 1 }}>

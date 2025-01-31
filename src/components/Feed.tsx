@@ -12,6 +12,7 @@ type FeedProps = {
   endReachedThreshold?: number,
   onStartReached?: () => void,
   onEndReached?: () => void,
+  isSubscribed?: boolean
 }
 
 const Feed = (props: FeedProps) => {
@@ -112,6 +113,7 @@ const Feed = (props: FeedProps) => {
                 contributes={item.contributes}
                 description={item.text}
                 postID={item?.postId}
+                isSubscribed={props.isSubscribed}
                 userID={item?.userProfile?.userID}
               />
             )}

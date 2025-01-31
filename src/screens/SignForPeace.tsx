@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Image,ScrollView, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Button, Image,ScrollView, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
 import ScholarBanner, { ScholarMiniBanner } from '../components/UnifyBanner'
 import Colors from '../theme/ScholarColors'
 import useUserProfileStore from '../zustand/UserProfileStore'
@@ -24,6 +24,7 @@ const SignForPeace = () => {
     }
 
     return (
+        <SafeAreaView>
         <ScrollView style={{ padding: 20 }}
         showsVerticalScrollIndicator={false}
             contentContainerStyle={{paddingBottom:20}}
@@ -51,6 +52,7 @@ const SignForPeace = () => {
                 </View>
             </View>
         </ScrollView>
+        </SafeAreaView>
     )
 }
 

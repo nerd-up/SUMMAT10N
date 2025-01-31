@@ -18,6 +18,7 @@ type FeedBoxProps = {
     description?: string,
     picture?: string,
     postID: string,
+    isSubscribed?: boolean,
     userID: string
 }
 export default function FeedBox(props: FeedBoxProps) {
@@ -78,6 +79,7 @@ export default function FeedBox(props: FeedBoxProps) {
     useEffect(()=>{
 
     },[isReportOpen]);
+  
     return (
         <View style={styles.post} >
             <Report postDetails={props} setIsVisible={setIsReportOpen} isVisible={isReportOpen}/>
@@ -122,7 +124,9 @@ export default function FeedBox(props: FeedBoxProps) {
                     </View>
                     : null
             }
-            <PostBottom postID={props.postID} userID={props.userID} likes={likes} isLikedByCurrentUser={isLikedByCurrentUser} LikeIcon={LikeIcon} fetchAllLikes={fetchAllLikes} comments={comments} />
+            <PostBottom 
+                isSubscribed={props.isSubscribed}
+             postID={props.postID} userID={props.userID} likes={likes} isLikedByCurrentUser={isLikedByCurrentUser} LikeIcon={LikeIcon} fetchAllLikes={fetchAllLikes} comments={comments} />
         </View>
     );
 }

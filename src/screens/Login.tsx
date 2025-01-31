@@ -27,7 +27,7 @@ function Login({ navigation }: any) {
                 requestedOperation: appleAuth.Operation.LOGIN,
                 requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
             });
-            console.log("appleAuthRequestResponse:",JSON.stringify(appleAuthRequestResponse,null,2));
+            // console.log("appleAuthRequestResponse:",JSON.stringify(appleAuthRequestResponse,null,2));
             // Ensure Apple returned a user identityToken
             if (!appleAuthRequestResponse.identityToken) {
                 throw new Error('Apple Sign-In failed - no identity token returned');
@@ -41,11 +41,10 @@ function Login({ navigation }: any) {
            
             // Sign in with the Firebase credential
             const userCredential = await auth().signInWithCredential(appleCredential);
-            console.log(JSON.stringify(userCredential,null,2),"these are dataaas");
+         
             // Retrieve user information
             const uid  = userCredential.user.uid;
-            console.log(uid);
-            
+          
             const fullName = appleAuthRequestResponse.fullName?.givenName || 'User';
             const email = userCredential.user.email || appleAuthRequestResponse.email || '';
             const userDocRef = firestore().collection('users').doc(uid);

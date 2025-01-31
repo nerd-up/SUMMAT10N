@@ -122,9 +122,6 @@ function ScholarTabs() {
                 tabBarStyle: {
 
                     backgroundColor: 'white',
-
-
-
                     padding: 10,
                     alignContent: 'center',
                     alignItems: 'center',
