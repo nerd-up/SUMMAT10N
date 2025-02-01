@@ -18,3 +18,7 @@ export const showError = (text1='',text2='') => {
         autoClose: true,
       })
     }
+
+    export const formatTransactionDate = (transactionDate: number) => {
+      return new Date(transactionDate).toLocaleString();
+    };

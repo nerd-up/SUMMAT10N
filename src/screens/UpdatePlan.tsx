@@ -5,7 +5,8 @@ import { showError, showSucess } from '../utils/utility';
 import UserPlan from '../components/UserPlan';
 import BackBtn from '../components/BackBtn';
 import SButton from '../components/SButton';
-
+import firestore, { count } from '@react-native-firebase/firestore';
+import { getUserId } from '../utils/Auth';
 const productIds = ['Ate12']; // Replace with your product IDs
 
 const UpdatePlan = ({navigation}:any) => {
@@ -36,10 +37,19 @@ const UpdatePlan = ({navigation}:any) => {
         try {
             // Purchase the selected plan
             const purchase = await requestPurchase({sku:selectedPlan.productId});
+            console.log(JSON.stringify(purchase,null, 2));
+            
           if (purchase) {
+            Alert.alert("hi"+Object.keys(purchase));
+            firestore()
+            .collection('users')
+            .doc(getUserId())
+            .update({
+              transactionDate:new Date(purchase?.transactionDate),
+              postDone:false,
+            })
             showSucess('Purchase Successful', `Subscribed to: ${selectedPlan.productId}`);
             navigation.navigate('Post');
-
           }
         } catch (error) {
           console.error('Purchase error:', error);
@@ -49,6 +59,25 @@ const UpdatePlan = ({navigation}:any) => {
         }
       };
     
+      const restorePurchases = async () => {
+       
+        try {
+          const purchases = await getAvailablePurchases();
+
+          const activePurchase = purchases.find(
+            (purchase) =>
+              purchase.productId === 'Ate12'
+          );
+          if (activePurchase) {
+            // setLoading(false)
+            // showSucess('Subscription Restored', `Active Subscription: ${activePurchase.productId}`);
+          }
+          
+        } catch (error) {
+          console.error('Error restoring purchases:', error);
+        }
+      };
+
       useEffect(() => {
         const initializeIAP = async () => {
           try {

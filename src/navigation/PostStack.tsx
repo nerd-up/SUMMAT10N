@@ -35,7 +35,6 @@ function PostStack() {
         setLoading(true);
         try {
           const purchases = await getAvailablePurchases();
-
           const activePurchase = purchases.find(
             (purchase) =>
               purchase.productId === 'Ate12'

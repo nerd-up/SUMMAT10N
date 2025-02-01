@@ -118,6 +118,7 @@ import {
     KeyboardAvoidingView,
 } from 'react-native';
 import React, { useState } from 'react';
+import firestore from '@react-native-firebase/firestore';
 import styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
 import { setInPost } from '../services/DataService';
@@ -141,6 +142,35 @@ export default function Post() {
             Alert.alert('You cannot share an empty post');
             return;
         }
+        const userDoc = await firestore()
+      .collection('users')
+      .doc(adminId)
+      .get();
+
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+      const transactionDate=userData?.transactionDate;
+      const postDone=userData?.postDone;
+      const transactionDateObj = new Date(transactionDate.seconds * 1000);
+
+      // Get the current date
+      const currentDate = new Date();
+
+      // Calculate the difference in months
+      const oneMonthLater = new Date(transactionDateObj);
+      oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+
+      if (currentDate >= oneMonthLater && !postDone) {
+       
+      } else {
+         showError('Failed','You can only make one post on a Subscription!')
+        return ;
+      }
+      // Logs true or false
+    } else {
+      console.log('No such user found!');
+    }
+
         try {
             const time = getCurrentTime();
             const post = {

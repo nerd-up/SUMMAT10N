@@ -218,7 +218,12 @@ export async function setInPost(post: {
             topic,
             month: currentMonth, // Store the current month for tracking
         });
-
+        await firestore()
+        .collection('users')
+        .doc(adminId)
+        .update({
+          postdone: true,
+        })
         console.log('Post successfully saved!');
     } catch (error) {
         console.error('Error saving post:', error);
