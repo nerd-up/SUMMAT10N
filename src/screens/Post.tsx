@@ -116,6 +116,9 @@ import {
     TextInput,
     Alert,
     KeyboardAvoidingView,
+    ScrollView,
+    SafeAreaView,
+    ActivityIndicator,
 } from 'react-native';
 import React, { useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
@@ -125,6 +128,8 @@ import { setInPost } from '../services/DataService';
 import { getUserId } from '../utils/Auth';
 import { showError, showSucess } from '../utils/utility';
 import { peaceTopics } from '../utils/peaceTopics';
+import BackBtn from '../components/BackBtn';
+import Loading from '../components/loadings/Loading';
 
 const getCurrentMonthTopic = () => {
     const currentMonth = new Date().toLocaleString('default', { month: 'long' });
@@ -133,6 +138,7 @@ const getCurrentMonthTopic = () => {
 export default function Post() {
     const [postDesc, setPostDesc] = useState('');
     const [adminId] = useState(getUserId());
+    const [loading,setLoading] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
     const { topic, description } = getCurrentMonthTopic();
@@ -152,18 +158,18 @@ export default function Post() {
       const transactionDate=userData?.transactionDate;
       const postDone=userData?.postDone;
       const transactionDateObj = new Date(transactionDate.seconds * 1000);
-
+      
       // Get the current date
       const currentDate = new Date();
 
       // Calculate the difference in months
       const oneMonthLater = new Date(transactionDateObj);
       oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-
-      if (currentDate >= oneMonthLater && !postDone) {
+       
+      if (currentDate <= oneMonthLater && !postDone) {
        
       } else {
-         showError('Failed','You can only make one post on a Subscription!')
+         showError('Failed','You can only make one post in a month!')
         return ;
       }
       // Logs true or false
@@ -172,6 +178,8 @@ export default function Post() {
     }
 
         try {
+        setLoading(true);
+
             const time = getCurrentTime();
             const post = {
                 adminId,
@@ -190,10 +198,18 @@ export default function Post() {
                 showError('Error', 'Failed to post. Please try again.');
             }
         }
+        finally{
+            setLoading(false);
+        }
     };
     return (
-        <View style={[styles.container, { margin: 5 }]}>
-            <KeyboardAvoidingView>
+        <SafeAreaView style={styles.container}>
+        <ScrollView style={[ { margin: 5 }]}>
+        <BackBtn  />
+          { loading&&
+            <ActivityIndicator style={{position:'absolute', 
+                left:'45%',top:'45%'}} size={70} />
+          }
                 <View style={{ flexDirection: 'column', alignItems: 'center', padding: 5, gap: 20 }}>
                     {/* Topic Section */}
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -231,7 +247,6 @@ export default function Post() {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </KeyboardAvoidingView>
 
             {/* Modal for Description */}
             <Modal visible={modalVisible} animationType="slide" transparent={true}>
@@ -248,6 +263,7 @@ export default function Post() {
                     </View>
                 </View>
             </Modal>
-        </View>
+        </ScrollView>
+        </SafeAreaView>
     );
 }

@@ -7,11 +7,15 @@ import BackBtn from '../components/BackBtn';
 import SButton from '../components/SButton';
 import firestore, { count } from '@react-native-firebase/firestore';
 import { getUserId } from '../utils/Auth';
+import { useUpdatePlanStore } from '../zustand/UserProfileStore';
 const productIds = ['Ate12']; // Replace with your product IDs
 
 const UpdatePlan = ({navigation}:any) => {
   const [loadingPlans, setLoadingPlans] = useState(false);
   const [plansData, setPlansData] = useState<Product[]>([]);
+  const { updatePlanData,setUpdatePlan }:any = useUpdatePlanStore.getState();
+  console.log(updatePlanData,"leh");
+  
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
     const fetchPlans = async () => {
         setLoadingPlans(true);
@@ -30,17 +34,13 @@ const UpdatePlan = ({navigation}:any) => {
       };
     
       const onNext = async () => {
-        if (!selectedPlan) {
-          Alert.alert('Error', 'Please select a plan to proceed.');
-          return;
-        }
+        
         try {
+          setUpdatePlan({ loading: true });
             // Purchase the selected plan
             const purchase = await requestPurchase({sku:selectedPlan.productId});
-            console.log(JSON.stringify(purchase,null, 2));
             
           if (purchase) {
-            Alert.alert("hi"+Object.keys(purchase));
             firestore()
             .collection('users')
             .doc(getUserId())
@@ -48,13 +48,17 @@ const UpdatePlan = ({navigation}:any) => {
               transactionDate:new Date(purchase?.transactionDate),
               postDone:false,
             })
+            setUpdatePlan({ loading: false, status: 'success',error:'none',response: purchase});
             showSucess('Purchase Successful', `Subscribed to: ${selectedPlan.productId}`);
             navigation.navigate('Post');
           }
         } catch (error) {
           console.error('Purchase error:', error);
+          setUpdatePlan({error:error});
+
           showError('Purchase Failed', error.message);
         } finally {
+          setUpdatePlan({ loading: null });
           
         }
       };

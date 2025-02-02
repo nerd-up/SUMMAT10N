@@ -201,13 +201,19 @@ export async function setInPost(post: {
         const postCollection = firestore().collection('AllPosts').doc(adminId).collection('Posts');
         const currentMonth = new Date().getMonth();
         // Check if a post already exists for the current month
-        const existingPostSnapshot = await postCollection
-            .where('month', '==', currentMonth)
-            .limit(1)
-            .get();
-        if (!existingPostSnapshot.empty) {
-            throw new Error('You can only make one post per month.');
-        }
+       await firestore()
+            .collection('users')
+            .doc(adminId)
+            .update({
+              postDone:true,
+            })
+        // const existingPostSnapshot = await postCollection
+        //     .where('month', '==', currentMonth)
+        //     .limit(1)
+        //     .get();
+        // if (!existingPostSnapshot.empty) {
+        //     throw new Error('You can only make one post per month.');
+        // }
         const newPostDoc = postCollection.doc(); // Auto-generate document ID
         const newPostId = newPostDoc.id;
         await newPostDoc.set({
@@ -262,9 +268,15 @@ export function deletePost(userID: string, postId:string) {
         .delete()
         .then(() => {
             showSucess('Success','Post Deleted successfully');
+             firestore()
+            .collection('users')
+            .doc(userID)
+            .update({
+              postDone:false,
+            })
         })
         .catch(err => {
-            showError('Failed to upload', err);
+            showError('Failed to delete', err);
         });
 }
 export const deletePostLike = async (postID: string, userID: string) => {

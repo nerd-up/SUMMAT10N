@@ -29,6 +29,10 @@ interface UserProfilePostStore {
     setAllPosts: (posts: UserProfilePost[]) => void
 }
 
+interface updatePlanStore {
+    updatePlanData:{loading:null,status:null,response:null,error:null},
+    setUpdatePlan: () => void
+}
 interface UserProfileStore {
     userID: string,
     bio: string,
@@ -44,6 +48,15 @@ interface UserProfileStore {
     setClass: (state: string) => void,
     setUsrName: (state: string) => void,
 }
+
+const useUpdatePlanStore = create((set) => ({
+    updatePlanData: { loading: null, status: null, response: null, error: null },
+
+    setUpdatePlan: (newData:any) =>
+        set((state:any) => ({
+            updatePlanData: { ...state.updatePlanData, ...newData }
+        }))
+}));
 
 const useUserProfileStore = create<UserProfileStore>((set) => ({
     userID: '',
@@ -104,5 +117,5 @@ const useLikesStore = create<UserProfileLikeStore>((set) => ({
     setAllLikes: likes => set(() => ({ likes }))
 }))
 
-export default useUserProfileStore
-export { usePostsStore, useLikesStore }
+export default useUserProfileStore;
+export { usePostsStore, useLikesStore,useUpdatePlanStore }

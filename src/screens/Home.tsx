@@ -13,7 +13,7 @@ import auth from '@react-native-firebase/auth'
 import Feed from '../components/Feed';
 import Colors from '../theme/ScholarColors';
 import Toast from 'react-native-toast-message';
-import useUserProfileStore from '../zustand/UserProfileStore';
+import useUserProfileStore, { useUpdatePlanStore } from '../zustand/UserProfileStore';
 import { getProfile } from '../services/DataService';
 import { getUserId } from '../utils/Auth';
 import { getAvailablePurchases, initConnection } from 'react-native-iap';
@@ -21,6 +21,7 @@ const Home = ({ navigation }: any) => {
 	const userProfile: any = useUserProfileStore(store => store)
 	const [hasUsrName, setHasUsrName] = useState(true);
 	const [usrName,setUserName]=useState('');
+	const { updatePlanData,setUpdatePlan }:any = useUpdatePlanStore.getState();
 	const [isSubscribed,setIsSubscribed]=useState(false);
 	const [visible,setVisible]=useState(false);
 	console.log(JSON.stringify(userProfile, null, 2), "hommmmeee");
@@ -96,7 +97,7 @@ const Home = ({ navigation }: any) => {
         };
     
         initializeIAP();
-      }, []);
+      }, [updatePlanData?.status]);
 
 	useEffect(() => {
 		// if(Platform.OS==='ios'){
@@ -184,7 +185,7 @@ const Home = ({ navigation }: any) => {
 					</TouchableOpacity>
 				</View>
 			</View>
-			<Feed />
+			<Feed isSubscribed={isSubscribed} />
 		</View>
 		
 	);
