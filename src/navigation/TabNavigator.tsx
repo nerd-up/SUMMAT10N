@@ -134,7 +134,7 @@ function ScholarTabs() {
             })}
         >
             <Tab.Screen name="Home" component={Home} options={{
-                title: "Home", headerTitleStyle: {
+                title: "", headerTitleStyle: {
                     color: Colors.primary, fontSize: 30
                 }, headerStyle: {
                     backgroundColor: Colors.lightBackground

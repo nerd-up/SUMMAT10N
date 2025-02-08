@@ -198,7 +198,7 @@ const WallOfPeace = () => {
     }
     return (
         <SafeAreaView style={{ backgroundColor: Colors.background }}>
-            <BackBtn />
+            <BackBtn style={{zIndex:99, elevation: 3}} />
             {/* <ScholarMiniBanner text='Wall of Peace' /> */}
             {/* <TouchableOpacity onPress={()=>navigation.navigate('PostStack')}  style={stylings.postBtn}>
                 <Text>Make a Post</Text>
@@ -329,6 +329,8 @@ const stylings = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: Colors.primary,
+        textAlign: 'center',
+        width: "100%"
     },
     trophyIcon: {
         width: 30,

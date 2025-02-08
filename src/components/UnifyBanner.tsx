@@ -11,11 +11,15 @@ type ScholarBannerProps = {
 
 export default function ScholarBanner(props: ScholarBannerProps) {
     return (
-        <View style={{ alignItems: 'center',height:350 }}>
-            <Image source={require('../assets/unify.png')}/>
+        <View style={{ alignItems: 'center', height: 350, justifyContent: 'flex-end' }}>
+            <Image 
+                source={require('../assets/unify-banner.png')}
+                style={{ marginBottom: 20 }} // Adjust this value as needed
+            />
         </View>
     );
 }
+
 export  function ScholarMiniBanner(props: any) {
     const iconColor = Colors.primary
     return (
@@ -25,7 +29,8 @@ export  function ScholarMiniBanner(props: any) {
             height: 150 
         }}>
             <Image 
-                source={require('../assets/sum.png')} 
+                source={require('../assets/icons/sum.png')}
+
                 style={{
                     resizeMode: 'contain', // Ensures the image fits properly
                     height: 150, // Adjust based on your desired size

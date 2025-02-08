@@ -1,10 +1,17 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image } from 'react-native'
+import React, { useEffect } from 'react'
 import Colors from '../theme/ScholarColors'
 import {WebView} from 'react-native-webview'
-
+import firestore from '@react-native-firebase/firestore';
 
 const Donor = () => {
+    useEffect(()=>{
+        const postsSnapshot = firestore()
+        .collection("WorldPeaceCollection")
+        .get();
+      const posts = postsSnapshot?.docs?.map(doc => doc.data());
+      console.log(postsSnapshot);
+    },[])
     return (
         <View style={styles.container}>
 
@@ -12,10 +19,9 @@ const Donor = () => {
                 <Text style={styles.headingTextStyle}>Bronze Badge</Text>
                 <Text style={styles.textStyle}>$0.99</Text>
             </View> */}
-            <View style={styles.card}>
-                <Text style={styles.headingTextStyle}>Silver Badge </Text>
-                <Text style={styles.textStyle}>$4.99</Text>
-            </View>
+            {/* <View style={styles.card}> */}
+                <Image style={{height: 300, width: 350, resizeMode: 'cover'}}source={{uri: 'http://summat10n.org/assets/images/appDev.png'}}></Image>
+            {/* </View> */}
             {/* <View style={styles.card}>
                 <Text style={styles.headingTextStyle}>Gold Badge</Text>
                 <Text style={styles.textStyle}>$9.99</Text>

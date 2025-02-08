@@ -53,7 +53,7 @@ function SignUp({ navigation }: any) {
             {/* Form */}
             <View style={formStyles.container}>
                 <SignUpForm nav={navigation} />
-                <Divider text="OR" />
+                <Divider text="Time To Stand" />
                
                 {/* Other Sign In Options */}
                 {/* <View>
