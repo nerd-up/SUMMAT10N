@@ -2,8 +2,14 @@ import { Alert, SafeAreaView, StyleSheet, Text, View, ImageBackground, Touchable
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
+import { showError } from '../utils/utility';
+import { deleteProfile, setInProfile } from '../services/DataService';
+import { getUserId } from '../utils/Auth';
+import useUserProfileStore from '../zustand/UserProfileStore';
 
 const Settings = ({ navigation }: any) => {
+	const userProfile: any = useUserProfileStore(store => store)
+   
     const signOut = () => {
         Alert.alert(
             "Logout Confirmation",
@@ -19,6 +25,7 @@ const Settings = ({ navigation }: any) => {
                     onPress: () => {
                         auth().signOut().then(() => {
                             AsyncStorage.removeItem('userID');
+                            setInProfile('','','','','')
                             navigation.navigate('Login');
                         }).catch(error => {
                             console.error("Sign out error: ", error);
@@ -29,6 +36,35 @@ const Settings = ({ navigation }: any) => {
             { cancelable: true }
         );
     };
+
+    const deleteUser = () => {
+        Alert.alert(
+            "Account Deletion Confirmation",
+            "Are you sure you want to Delete your account? You will not be able to login again...",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                {
+                    text: "Yes",
+                    onPress: () => {
+                        auth().currentUser?.delete().then(() => {
+                            AsyncStorage.removeItem('userID');
+                            setInProfile(userProfile?.userID,'','','','')
+                            navigation.navigate('Login');
+                        }).catch(error => {
+                            showError('Failed', 'Maybe you need to login again!\n'+error?.code);
+                            console.error("Account Deletion Error error: ", error);
+                        });
+                    }
+                }
+            ],
+            { cancelable: false }
+        );
+    }
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -46,7 +82,7 @@ const Settings = ({ navigation }: any) => {
                     </TouchableOpacity>
 
                     {/* Delete Account Button */}
-                    <TouchableOpacity style={[styles.button, styles.deleteButton]}>
+                    <TouchableOpacity onPress={deleteUser} style={[styles.button, styles.deleteButton]}>
                         <Text style={styles.buttonText}>Delete Account</Text>
                     </TouchableOpacity>
                 </View>

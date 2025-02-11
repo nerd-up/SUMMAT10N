@@ -15,6 +15,7 @@ import { appleAuth } from '@invertase/react-native-apple-authentication';
 import firestore from '@react-native-firebase/firestore';
 import useUserProfileStore from '../zustand/UserProfileStore';
 import { getUserId } from '../utils/Auth';
+import Loading from '../components/loadings/Loading';
 
 function Login({ navigation }: any) {
     const [timeLeft, setTimeLeft] = useState("");
@@ -83,8 +84,6 @@ function Login({ navigation }: any) {
     }
     useEffect(() => {
         const targetDate = new Date("2030-01-01T00:00:00Z").getTime();
-
-
         const updateCountdown = () => {
             const now = new Date().getTime();
             const timeDiff = targetDate - now;
@@ -113,6 +112,7 @@ function Login({ navigation }: any) {
 
     return (
         <ScrollView style={styles.container}>
+            <Loading  />
             <ScholarBanner text="Login" />
             {/* Countdown */}
             <View style={{ alignItems: 'center', marginVertical: 20 }}>

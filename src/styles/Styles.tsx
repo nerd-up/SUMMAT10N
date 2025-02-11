@@ -248,13 +248,17 @@ const styles = StyleSheet.create({
     width: '10%',
     margin: 5
    },
-   postButtonStyle:{ 
-    
-    backgroundColor: Colors.primary, 
-    margin: 5,
+   viewMore:{ 
     textAlign: 'center',
-    padding: 15,
-    borderRadius: 10 
+    color:Colors.primary,
+    fontWeight:'700',
+  },
+  postButtonStyle:{
+  backgroundColor:Colors.primary,
+  padding: 10,
+  borderRadius: 10,
+  margin: 10,
+  textAlign:'center',
   },
   postButtonContainer:{
     flexDirection: 'row', 

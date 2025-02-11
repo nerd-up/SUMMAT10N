@@ -103,17 +103,13 @@ export function setInProfile(
     profilePic: string,
     residency: string,
     usrName: string,
-    signed: string
+    signed?: string
 ) {
-    console.log("userID:", userID);
-    console.log("bio:", bio);
-    console.log("profilePic:", profilePic);
-    console.log("residency:", residency);
-    console.log("usrName:", usrName);
-    console.log("signed:", signed);
+    console.log(userID,"loo g phrro");
+    
     firestore()
         .collection('users')
-        .doc(getUserId())
+        .doc(userID)
         .set(
             {
                 userID: userID,
@@ -121,7 +117,7 @@ export function setInProfile(
                 profilePic: profilePic,
                 residency: residency,
                 usrName: usrName,
-                signed: signed
+                signed: signed,
             },
             { merge: true },
         )
@@ -129,8 +125,15 @@ export function setInProfile(
             console.log('success!');
         })
         .catch(err => {
-            console.log("i got an error");
+            console.error("i got an error",err);
         });
+}
+
+export const deleteProfile=async(userID:string)=>{
+   await firestore()
+    .collection('users')
+    .doc(userID)
+    .delete();
 }
 export const getUsers = async () => {
     try {
@@ -185,6 +188,10 @@ export function saveSignatures(
         )
         .then(() => {
             console.log('success signed!');
+            showSucess(
+                "Congrats🥳!!",
+                "Peace of treaty is signed"
+            );
         })
         .catch(err => {
             console.log("i got an error");
@@ -268,12 +275,12 @@ export function deletePost(userID: string, postId:string) {
         .delete()
         .then(() => {
             showSucess('Success','Post Deleted successfully');
-             firestore()
-            .collection('users')
-            .doc(userID)
-            .update({
-              postDone:false,
-            })
+            //  firestore()
+            // .collection('users')
+            // .doc(userID)
+            // .update({
+            //   postDone:false,
+            // })
         })
         .catch(err => {
             showError('Failed to delete', err);

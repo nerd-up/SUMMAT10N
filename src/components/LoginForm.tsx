@@ -20,6 +20,7 @@ import Toast from 'react-native-toast-message';
 import useLoadingStore from '../zustand/UseLoadingStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { showError } from '../utils/utility';
 
 type LoginFormProps = {
     nav: any
@@ -50,7 +51,7 @@ export default function LoginForm(props: LoginFormProps) {
                 const user: any = auth().currentUser;
                 if (user.isEmailVerified()) {
                     Alert.alert("Login successfull!");
-                    const userId = getUserId();
+                    const userId =user?.uid;
                     props.nav.navigate('Splash', { userId });
                     disableLoading();
                     getProfile(userId)
@@ -84,56 +85,75 @@ export default function LoginForm(props: LoginFormProps) {
             });
     }
 
+    // getProfile(getUserId())
+    // .then(async (profile: any) => {
+    //     // if could not find a profile for anonomous
+    //     console.log(profile,"looooooop");
+        
+    //     if (profile === undefined) {
+    //         console.log("Added profile");
+    //         // setInProfile(userId, 'no bio', ' ', 'no Residency', ' ',' ')
+    //     }
+
+    //     setProfileData({ userID: getUserId(), ...profile })
+        
+    // })
+    // .catch((error) => {
+    //     disableLoading();
+    //     console.error(error);
+    // })
     // Login with Form data
     function tryAndLogIn() {
 
         setIsSubmitDisabled(true);
 
         if (usrEmail.length === 0) {
-            Toast.show({
-                type: 'error',
-                text1: "Error!",
-                text2: "Email is Required!"
-            });
+            showError( "Error!",
+                "Email is Required!"
+            );
             setIsSubmitDisabled(false);
             return;
         }
 
         if (usrPassword.length === 0) {
-            Toast.show({
-                type: 'error',
-                text1: "Error!",
-                text2: "Password required!"
-            });
-
+           showError(
+               "Error!",
+                "Password required!"
+            );
             setIsSubmitDisabled(false);
             return;
         }
           allowLoading();
         auth().signInWithEmailAndPassword(usrEmail, usrPassword)
             .then(user => {
+               
+              if(!user?.user?.emailVerified){
+                showError('Failed','Please Verify Your Email!');
+                disableLoading();
+
+                return;
+              }
                 if (auth().currentUser?.uid) {
-                    const userId = user.user.uid.toString();
-                    props.nav.navigate('Splash', { userId });
-                    disableLoading();
+                    const userId = auth().currentUser?.uid || user.user?.uid?.toString();
                     getProfile(userId)
                         .then(async (profile) => {
-                            console.log(profile);
-                            await AsyncStorage.setItem('userID',auth().currentUser?.uid);
-                            setUserEmail('');
-                            setUserPassword('');
+                            await AsyncStorage.setItem('userID',userId);
+                            // setUserEmail('');
+                            // setUserPassword('');
                         })
                         .catch((error) => {
                             console.log(error);
 
                         })
+                        setTimeout(() => {
+                    disableLoading();
+                    props.nav.navigate('Splash', { userId });
+                            
+                        }, 1000);
+
                 } else {
                     disableLoading();
-                    Toast.show({
-                        type: 'error',
-                        text1: 'Attention',
-                        text2: "Please Verify Your Email"
-                    });
+                    showError('Failed','Failed to login!')
 
                 }
             })
@@ -146,6 +166,8 @@ export default function LoginForm(props: LoginFormProps) {
             
     }
 
+    // console.log(getUserId(),"aagggaiio sab di maan");
+                    
     return (
         <View style={formStyles.submitContainer}>
             

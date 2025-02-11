@@ -82,17 +82,17 @@ export default function SignUpForm(props: SignUpFormProps) {
                 const user = auth().currentUser;
                 await user?.sendEmailVerification();
                 const userId: any = user?.uid;
-
                 //console.log(userId)
-                showSucess('Success', 'You Signed Up Successfully!')
+               
+                showSucess('Success', 'You Signed Up Successfully, Check your email!')
                 // adds the new user to the Users firestore database collection
-                setInProfile(userId, 'no bio', ' ', value, usrName, ' ')
+                setInProfile(userId, 'no bio', ' ', value, usrName,'')
                 disableLoading();
             })
             .catch(error => {
                 // Alert.alert("Error creating account!");
                 setErrorMsg(error?.code);
-                console.log(error);
+                console.log(error,"wwaaaahg waaah");
                 disableLoading();
                 setIsSubmitDisabled(false);
             });
@@ -102,9 +102,6 @@ export default function SignUpForm(props: SignUpFormProps) {
         value: country,
     }));
     
-    useEffect(()=>{
-        console.log(value);
-    },[value])
     return (
         <View style={formStyles.submitContainer}>
             {/* Input Fields */}
@@ -119,12 +116,15 @@ export default function SignUpForm(props: SignUpFormProps) {
                     items={countryOptions}
                     setOpen={setOpen}
                     setValue={setValue}
+                    placeholder='Select a Country'
                     setItems={setItems}
+                    searchable
                     style={styles.formField}
+                    searchPlaceholder='search'
                 />
             </View>
 
-            <Text style={{ color: "red" }}>{errorMsg.toString()}</Text>
+            <Text style={{ color: "red" }}>{errorMsg?.toString()}</Text>
 
             {/* Submit Button */}
             <View style={formStyles.submitBtnContainer}>

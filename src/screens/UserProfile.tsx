@@ -164,7 +164,7 @@ const UserProfile = ({ navigation }: any) => {
 							{/* <Icon name="create-outline" size={25} color={Colors.primary} /> */}
 						</TouchableOpacity>
 						<Text style={{ color: 'white', textAlign: 'center', fontSize: 50 }}>{userProfile.residency}</Text>
-						<View style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: 'transparent', height: 120, width: 120, bottom: -60, left: '50%', marginLeft: -60, borderRadius: 50 }}>
+						{/* <View style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: 'transparent', height: 120, width: 120, bottom: -60, left: '50%', marginLeft: -60, borderRadius: 50 }}>
 							{
 								userProfile.profilePic !== "" ?
 									<Image source={{ uri: userProfile.profilePic }} style={{
@@ -184,11 +184,11 @@ const UserProfile = ({ navigation }: any) => {
 									}} />
 							}
 
-						</View>
+						</View> */}
 					</View>
 				</View>
 				{/* Year */}
-				<View style={{ alignItems: 'center', marginTop: 55 }}>
+				<View style={{ alignItems: 'center',}}>
 					<View style={{ padding: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 						<Text style={[styles.headingStyle]}>{userProfile.usrName}</Text>
 						{
@@ -210,7 +210,7 @@ const UserProfile = ({ navigation }: any) => {
 						{userProfile.residency && userProfile.residency}
 					</Text>
 				</View>
-				<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+				{/* <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
 					<View style={{ flexDirection: 'column', marginTop: 10, alignItems: 'center' }}>
 						<Text style={{ fontSize: 20, color: 'gray' }}>{friends.length}</Text>
 						<Text style={{ fontSize: 20, color: 'gray' }}>Friends</Text>
@@ -219,22 +219,22 @@ const UserProfile = ({ navigation }: any) => {
 						<Text style={{ fontSize: 20, color: 'gray' }}>{countUnique()}</Text>
 						<Text style={{ fontSize: 20, color: 'gray' }}>Flags</Text>
 					</View>
-				</View>
-				<Divider />
-				<View>
+				</View> */}
+				{/* <Divider /> */}
+				{/* <View>
 					<Text style={styles.headingStyle}>Interest</Text>
 					<View style={{ margin: 5 }}>
 						<Text style={styles.contentStyle}>{userProfile && userProfile.bio}</Text>
 					</View>
-				</View>
+				</View> */}
 				{/* Friends List */}
-				<View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+				{/* <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
 					<Text style={styles.headingStyle}>Friends</Text>
 					<TouchableOpacity onPress={()=>navigation.navigate('Friends',{selectedOption:"Your Friends"})}>
 						<Text style={styles.linkStle}>See All</Text>
 					</TouchableOpacity>
-				</View>
-				<View style={styles.friendBoxContainer}>
+				</View> */}
+				{/* <View style={styles.friendBoxContainer}>
 					<ScrollView horizontal={true} nestedScrollEnabled={true}>
 						<View style={styles.friendBoxes}>
 							{
@@ -247,11 +247,11 @@ const UserProfile = ({ navigation }: any) => {
 						</View>
 					</ScrollView>
 
-				</View>
-				<View>
+				</View> */}
+				{/* <View>
 					<Text style={styles.headingStyle}>Posts</Text>
-				</View>
-				<View
+				</View> */}
+				{/* <View
 					style={{
 						margin: 5,
 						flexDirection: 'row',
@@ -278,29 +278,32 @@ const UserProfile = ({ navigation }: any) => {
 						<TouchableOpacity>
 							<Text>Image</Text>
 							{/* <Icon name="image" size={35} color={Colors.primary} /> */}
-						</TouchableOpacity>
-					</View>
+						{/* </TouchableOpacity> */}
+					{/* </View> */}
 				</View>
-				<MissionLine text="World Relations" />
-				<View style={styles.container}>
+				<MissionLine text="World Relations" /> 
+				{/* <View style={styles.container}>
 					<View style={{ padding: 10 }}>
 						{/* <Feed /> */}
 						<View style={{ backgroundColor: Colors.feedBackground }}>
 							{allPosts.map((item: any, index: number) => // FIXME make sure can be indexed
-								<FeedBox key={index} admin={userProfile.usrName} avatar={userProfile.profilePic}
+								{ console.log(item,"oop");
+								
+								return <FeedBox key={index} admin={userProfile.usrName} avatar={userProfile.profilePic}
 									time={item.time}
 									picture={item.image}
-									likes={allLikes.length}
-									contributes={0}
-									description={item.description}
+									// likes={item?.likes}
+									// contributes={0}
+									description={item.text}
 									postID={item.postId}
-									userID={item.userID}
+									userID={item.adminId}
 									navigation={navigation}
-								/>)
+								/>}
+							)
 							}
-						</View>
-					</View>
-				</View>
+						{/* </View> */}
+					{/* </View> */}
+				{/* </View>  */}
 			</View>
 		</ScrollView>
 	);

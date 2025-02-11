@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
    width:'100%',
    alignItems: 'center',
    justifyContent: 'center',
+   zIndex:100,
+   elevation:3
 
   },
   loadingImage:{

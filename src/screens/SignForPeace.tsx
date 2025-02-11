@@ -4,8 +4,10 @@ import ScholarBanner, { ScholarMiniBanner } from '../components/UnifyBanner'
 import Colors from '../theme/ScholarColors'
 import useUserProfileStore from '../zustand/UserProfileStore'
 import { useNavigation } from '@react-navigation/native'
-import { saveSignatures } from '../services/DataService'
+import { getProfile, saveSignatures } from '../services/DataService'
 import Toast from 'react-native-toast-message'
+import { showSucess } from '../utils/utility'
+import { getUserId } from '../utils/Auth'
 
 
 const SignForPeace = () => {
@@ -15,12 +17,12 @@ const SignForPeace = () => {
     const signPeaceTreaty = () => {
         if(signatures.length>0){
             saveSignatures(signatures);
-            Toast.show({
-                text1:"Congrats🥳!!",
-                text2:"Piece of treaty is signed"
-            })
+            // getProfile(getUserId())
+            setTimeout(() => {
+            navigation.navigate('UserProfile');
+            }, 1000);
         }
-        navigation.navigate('Certificate')
+        // navigation.navigate('Certificate')
     }
 
     return (
@@ -32,18 +34,22 @@ const SignForPeace = () => {
             <ScholarMiniBanner text='Peace Treaty' />
             
             <View>
-                <View style={{ flex: 1, alignItems: 'center', marginTop: 150 }}>
+                <View style={{ flex: 1, alignItems: 'center', marginTop: 150,gap:15 }}>
                     <Text style={{ textAlign: 'center', fontSize: 28, }}>
-                        I "{userProfile.usrName}" Sign This treaty for world peace to end war and make the world a better place
+                        I <Text style={{color:Colors.primary,fontWeight:'700'}}>{userProfile.usrName}</Text>  Sign This treaty for world peace to end war and make the world a better place
                     </Text>
                     <TextInput
-                        style={{ width: 350, textAlign: 'center', fontSize: 20, borderRadius: 10, color: Colors.primary, borderWidth: 1, }}
+                        style={{ width: '90%', textAlign: 'center',
+                            padding:8, fontSize: 20, borderRadius: 20, color: Colors.primary, borderWidth: 0.4,
+                        elevation:4,boxShadow:'grey',shadowOpacity:0.2
+                        }}
                         placeholder='Type in Your name'
+                        placeholderTextColor={'grey'}
                         onChangeText={(text)=>setSignatures(text)}
                         value={signatures}
                     ></TextInput>
                     <TouchableOpacity onPress={() => signPeaceTreaty()}>
-                        <View style={{ marginTop: 20, backgroundColor: Colors.primary, padding: 10, borderRadius: 10, width: 300, alignItems: 'center' }}>
+                        <View style={{ backgroundColor: Colors.primary, padding: 10, borderRadius: 10, width: 300, alignItems: 'center' }}>
                             <Text style={{ color: 'white', fontSize: 20 }}>
                                 Submit
                             </Text>

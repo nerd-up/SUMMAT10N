@@ -155,23 +155,25 @@ export default function Post() {
 
     if (userDoc.exists) {
       const userData = userDoc.data();
-      const transactionDate=userData?.transactionDate;
-      const postDone=userData?.postDone;
-      const transactionDateObj = new Date(transactionDate.seconds * 1000);
-      
-      // Get the current date
-      const currentDate = new Date();
 
-      // Calculate the difference in months
-      const oneMonthLater = new Date(transactionDateObj);
-      oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+      //logic for subscriptions
+    //   const transactionDate=userData?.transactionDate;
+    //   const postDone=userData?.postDone;
+    //   const transactionDateObj = new Date(transactionDate.seconds * 1000);
+      
+    //   // Get the current date
+    //   const currentDate = new Date();
+
+    //   // Calculate the difference in months
+    //   const oneMonthLater = new Date(transactionDateObj);
+    //   oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
        
-      if (currentDate <= oneMonthLater && !postDone) {
+    //   if (currentDate <= oneMonthLater && !postDone) {
        
-      } else {
-         showError('Failed','You can only make one post in a month!')
-        return ;
-      }
+    //   } else {
+    //      showError('Failed','You can only make one post in a month!')
+    //     return ;
+    //   }
       // Logs true or false
     } else {
       console.log('No such user found!');
@@ -204,25 +206,30 @@ export default function Post() {
     };
     return (
         <SafeAreaView style={styles.container}>
+             
         <ScrollView style={[ { margin: 5 }]}>
-        <BackBtn  />
+       
           { loading&&
             <ActivityIndicator style={{position:'absolute', 
                 left:'45%',top:'45%'}} size={70} />
           }
+           <View style={{ alignItems: 'center', justifyContent: 'space-between' ,flexDirection:'row',width:'100%',marginHorizontal:'1%'}}>
+                    <BackBtn style={{position:'relative',top:0,left:0}} />
+                        <Text style={{ fontSize: 18 }}>Topic of the Month</Text>
+                   <Text></Text>
+                    </View>
                 <View style={{ flexDirection: 'column', alignItems: 'center', padding: 5, gap: 20 }}>
                     {/* Topic Section */}
-                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ textAlign: 'center', fontSize: 18 }}>Topic of the Month</Text>
-                    </View>
-                    <View style={[styles.adminSection, { marginTop: 10, flexDirection: 'column' }]}>
+                   
+                    <View style={[styles.adminSection, { marginTop: 10,gap:5, flexDirection: 'row',alignItems:'center' }]}>
                         <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{topic}</Text>
+                        <TouchableOpacity onPress={() => setModalVisible(true)}>
+                        <Text style={styles.viewMore}>View More...</Text>
+                    </TouchableOpacity>
                     </View>
 
                     {/* View More Button */}
-                    <TouchableOpacity onPress={() => setModalVisible(true)}>
-                        <Text style={styles.postButtonStyle}>View More...</Text>
-                    </TouchableOpacity>
+                    
                 </View>
 
                 {/* Share Thoughts */}

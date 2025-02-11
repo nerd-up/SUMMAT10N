@@ -48,7 +48,6 @@ export default function FeedBox(props: FeedBoxProps) {
                     ...doc.data()
                 }));
                 setLikes(likesArray);
-
                 const userLike = likesArray.some((like: any) => like.userID === auth().currentUser?.uid);
                 setIsLikedByCurrentUser(userLike);
                 setLikeIcon(userLike ? require('../assets/icons/filled-like.png') : require('../assets/icons/like.png'));
@@ -125,7 +124,7 @@ export default function FeedBox(props: FeedBoxProps) {
                     : null
             }
             <PostBottom 
-                isSubscribed={props.isSubscribed}
+                // isSubscribed={props.isSubscribed}
              postID={props.postID} userID={props.userID} likes={likes} isLikedByCurrentUser={isLikedByCurrentUser} LikeIcon={LikeIcon} fetchAllLikes={fetchAllLikes} comments={comments} />
         </View>
     );

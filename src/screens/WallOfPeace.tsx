@@ -198,12 +198,13 @@ const WallOfPeace = () => {
     }
     return (
         <SafeAreaView style={{ backgroundColor: Colors.background }}>
-            <BackBtn style={{zIndex:99, elevation: 3}} />
             {/* <ScholarMiniBanner text='Wall of Peace' /> */}
             {/* <TouchableOpacity onPress={()=>navigation.navigate('PostStack')}  style={stylings.postBtn}>
                 <Text>Make a Post</Text>
             </TouchableOpacity> */}
             <View style={stylings.header}>
+            <BackBtn style={{zIndex:99,left:1, elevation: 3,position:'relative',top:0}} />
+
                 <Text style={stylings.headerText}>Wall of Peace</Text>
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
                     <Image
@@ -213,7 +214,7 @@ const WallOfPeace = () => {
                 </TouchableOpacity>
             </View>
             <View>
-                <TextInput style={stylings.searchBar} value={search} onChangeText={(text) => setSearch(text)} placeholder='search for person'>
+                <TextInput placeholderTextColor={'grey'} style={stylings.searchBar} value={search} onChangeText={(text) => setSearch(text)} placeholder='search for person'>
 
                 </TextInput>
             </View>
@@ -324,17 +325,17 @@ const stylings = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 20,
         backgroundColor: Colors.lightBackground,
+        width:'100%'
     },
     headerText: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',
         color: Colors.primary,
         textAlign: 'center',
-        width: "100%"
+        // width: "100%"
     },
     trophyIcon: {
         width: 30,
         height: 30,
-        
     },
 })

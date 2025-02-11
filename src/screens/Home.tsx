@@ -17,6 +17,7 @@ import useUserProfileStore, { useUpdatePlanStore } from '../zustand/UserProfileS
 import { getProfile } from '../services/DataService';
 import { getUserId } from '../utils/Auth';
 import { getAvailablePurchases, initConnection } from 'react-native-iap';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = ({ navigation }: any) => {
 	const userProfile: any = useUserProfileStore(store => store)
 	const [hasUsrName, setHasUsrName] = useState(true);
@@ -86,18 +87,18 @@ const Home = ({ navigation }: any) => {
         }
       };
 
-      useEffect(() => {
-        const initializeIAP = async () => {
-          try {
-            await initConnection();
-            restorePurchases();
-          } catch (error) {
-            console.error('IAP initialization error:', error);
-          }
-        };
+    //   useEffect(() => {
+    //     const initializeIAP = async () => {
+    //       try {
+    //         await initConnection();
+    //         restorePurchases();
+    //       } catch (error) {
+    //         console.error('IAP initialization error:', error);
+    //       }
+    //     };
     
-        initializeIAP();
-      }, [updatePlanData?.status]);
+    //     initializeIAP();
+    //   }, [updatePlanData?.status]);
 
 	useEffect(() => {
 		// if(Platform.OS==='ios'){
@@ -105,6 +106,7 @@ const Home = ({ navigation }: any) => {
 		// }
 		// PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
 		displayWelcomeMessage();
+		console.log(AsyncStorage.getItem('userID'),"this isss")
 		getProfile(getUserId())
 			.then(profile => {
 				console.log(JSON.stringify(profile), "yeh leh");
@@ -152,7 +154,7 @@ const Home = ({ navigation }: any) => {
 					</View>
 				</View>
 			</Modal> */}
-			<View
+			{/* <View
 				style={{
 					margin: 5,
 					flexDirection: 'row',
@@ -184,7 +186,7 @@ const Home = ({ navigation }: any) => {
 						}} />
 					</TouchableOpacity>
 				</View>
-			</View>
+			</View> */}
 			<Feed isSubscribed={isSubscribed} />
 		</View>
 		

@@ -15,13 +15,8 @@ import formStyles from '../styles/FormStyles';
 import styles from '../styles/Styles';
 import { overwrite, getName, getCode } from 'country-list';
 import countryList from 'country-list';
+import Loading from '../components/loadings/Loading';
 function SignUp({ navigation }: any) {
-    useEffect(() => {
-
-        console.log(getName('IS')); // Iceland
-        console.log(getCode('Pakistan'));
-        console.log(countryList.getNames());
-    }, []);
     // async function onAppleButtonPress() {
     //     // Start the sign-in request
     //     // console.log("i am here");
@@ -48,7 +43,7 @@ function SignUp({ navigation }: any) {
     
     return (
         <ScrollView style={styles.container}>
-
+    <Loading />
             <ScholarBanner text="Sign Up" />
             {/* Form */}
             <View style={formStyles.container}>

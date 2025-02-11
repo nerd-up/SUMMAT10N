@@ -67,7 +67,6 @@ const Feed = (props: FeedProps) => {
 
       // Sort the posts by time (assuming `time` is a timestamp)
       allPosts.sort((a: any, b: any) => b.time - a.time);
-      console.log(allPosts);
       setFeed(allPosts);
     } catch (error) {
       console.error("An error occurred while fetching posts:", error);
@@ -75,6 +74,7 @@ const Feed = (props: FeedProps) => {
       setLoading(false);
     }
   };
+  
   const refreshFeed=()=>{
     setrefreshing(true);
     fetchFeeds();
@@ -113,7 +113,7 @@ const Feed = (props: FeedProps) => {
                 contributes={item.contributes}
                 description={item.text}
                 postID={item?.postId}
-                isSubscribed={props.isSubscribed}
+                // isSubscribed={props.isSubscribed}
                 userID={item?.userProfile?.userID}
               />
             )}

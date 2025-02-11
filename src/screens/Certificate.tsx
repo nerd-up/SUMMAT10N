@@ -69,6 +69,9 @@ const Certificate = () => {
           console.error('Error generating PDF:', error);
         }
       };
+
+      console.log(userProfile);
+      
     return (
         <View style={{ flex: 1, padding: 20, alignItems: 'center',justifyContent:'center' ,backgroundColor:Colors.background}}>
             <View style={{ flexDirection: 'row',alignItems:'center',justifyContent:'center' }}>
@@ -87,7 +90,7 @@ const Certificate = () => {
                     Certificate Of Peace of {userProfile.treatyDate}, "{userProfile?.signed}" has Signed
                     The treaty for world Peace
                 </Text>
-                <Text style={{ textDecorationLine:'underline',fontSize: 28, color: Colors.text, textAlign: 'center', justifyContent: 'center' }}>
+                <Text style={{ textDecorationLine:'underline',fontSize: 28,fontWeight:'700', color: Colors.primary, textAlign: 'center', justifyContent: 'center' }}>
                     {userProfile.usrName}
                 </Text>
                 <Text style={{fontSize: 28, color: Colors.text, textAlign: 'center', justifyContent: 'center' }}>

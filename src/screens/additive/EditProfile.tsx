@@ -34,9 +34,8 @@ const EditProfile = () => {
 
     const [name, setName] = useState(userProfile.usrName);
     const [signed, setSigned] = useState("");
-
     
-    const [citizenShip, setCitizenShip] = useState("");
+    const [citizenShip, setCitizenShip] = useState(userProfile.residency);
     const [major, setMajor] = useState(userProfile.Class);
     const [bio, setBio] = useState(userProfile.bio);
     const [profilePic, setProfilePic] = useState(userProfile.profilePic);
@@ -52,7 +51,7 @@ const EditProfile = () => {
             Alert.alert('Name cannot be Empty!');
         } else {
             console.log("till here everything is okay!")
-            setInProfile(userId, bio, profilePic, citizenShip, name,signed);
+            setInProfile(userId, bio, profilePic, citizenShip, name,userProfile?.signed);
             Alert.alert('Updated!');
             navigation.goBack();
         }
@@ -91,7 +90,7 @@ const EditProfile = () => {
 
     return (
         <View style={{ flex:1,alignContent: 'center', justifyContent: 'center' }}>
-            <View
+            {/* <View
                 style={{
                     justifyContent: 'center',
                     alignContent: 'center',
@@ -104,8 +103,8 @@ const EditProfile = () => {
                         :
                         <Image style={styles.profilePictur} source={{ uri: profilePic }} />
                 }
-            </View>
-            <View style={{ alignItems: 'center', margin: 10 }}>
+            </View> */}
+            {/* <View style={{ alignItems: 'center', margin: 10 }}>
                 <TouchableOpacity onPress={openImagePicker}>
                     <Text
                         style={{
@@ -116,7 +115,7 @@ const EditProfile = () => {
                         Edit Profile picture
                     </Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
             <View style={{ margin: 10 }}>
                 <View style={{ margin: 5 }}>
                     <TextInput
@@ -132,7 +131,7 @@ const EditProfile = () => {
                         placeholder="Your Country"
                         onChangeText={text => setCitizenShip(text)}></TextInput>
                 </View>
-                <View style={{ margin: 5 }}>
+                {/* <View style={{ margin: 5 }}>
                     <TextInput
                         style={{
                             backgroundColor: Colors.background,
@@ -142,7 +141,7 @@ const EditProfile = () => {
                         value={bio}
                         placeholder="Bio"
                         onChangeText={text => setBio(text)}></TextInput>
-                </View>
+                </View> */}
             </View>
             <View
                 style={{

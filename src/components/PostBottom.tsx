@@ -34,14 +34,16 @@ const PostBottom = (props: PostBottomProps) => {
     }, [props.likes, props.isLikedByCurrentUser]);
 
     const handleLikePost = async () => {
-        if(!props.isSubscribed){
-      showError('Failed','You must make a donation to vote any post');
-      setTimeout(() => {
-        navigation.navigate('UpdatePlan');
-      }, 1000);
-      navigation
-      return;
-        }
+
+        //just for subscription
+    //     if(!props.isSubscribed){
+    //   showError('Failed','You must make a donation to vote any post');
+    //   setTimeout(() => {
+    //     navigation.navigate('UpdatePlan');
+    //   }, 1000);
+    //   navigation
+    //   return;
+    //     }
         if (isLikedByCurrentUser) {
             setLikeIcon(require('../assets/icons/like.png'));
             await deletePostLike(props.postID, props.userID);
@@ -62,7 +64,8 @@ const PostBottom = (props: PostBottomProps) => {
     return (
         <View>
             <View style={styles.postBottom}>
-                <TouchableOpacity disabled={props.userID===getUserId()} onPress={handleLikePost} style={{ width: '100%', backgroundColor: Colors.primary, alignItems: 'center', borderColor: 'gray' }}>
+                <TouchableOpacity disabled={props.userID===getUserId()} onPress={handleLikePost}
+                 style={{ width: '100%', backgroundColor: Colors.primary, alignItems: 'center', borderColor: 'gray' }}>
                     <View style={styles.actionBtn}>
                         <Image source={LikeIcon} style={{
                             height: 20, width: 20,
@@ -94,7 +97,9 @@ const PostBottom = (props: PostBottomProps) => {
                         })
                     }
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <TextInput onChangeText={(txt) => setComment(txt)} value={comment} style={{ borderWidth: 1, flex: 1, borderRadius: 20, marginRight: 10, borderColor: 'gray', padding: Platform.OS === 'ios' ? 10 : 0 }} placeholder='Type comment' />
+                        <TextInput onChangeText={(txt) => setComment(txt)} value={comment} style={{ borderWidth: 1, flex: 1,
+                             borderRadius: 20, marginRight: 10, borderColor: 'gray',
+                              padding: Platform.OS === 'ios' ? 10 : 0 }} placeholder='Type comment' />
                         <TouchableOpacity style={{ backgroundColor: Colors.primary, padding: 10, borderRadius: 10 }} onPress={sentComment}>
                             <Text style={{ fontWeight: 'bold', color: 'white' }}>Send</Text>
                         </TouchableOpacity>

@@ -27,25 +27,29 @@ import { icons } from '../assets/icons';
 import Donor from '../screens/Donor';
 import { getProfile } from '../services/DataService';
 import { getUserId } from '../utils/Auth';
+import Post from '../screens/Post';
 
 
 const Tab = createBottomTabNavigator();
 
 const routeIconUrls: { [key: string]: any } = {
-    'Home': require('../assets/icons/home.png'),
-    'Friends': require('../assets/icons/friends.png'),
-    'Donor': require('../assets/icons/friends.png'),
-    'Notifications': require('../assets/icons/bell-ring.png'),
-    'UserProfile': require('../assets/icons/user.png'),
-    'SignForPeace': require('../assets/icons/world-peace.png'),
-    'Certificate': require('../assets/icons/world-peace.png')
+    'Home': {uri:require('../assets/icons/home.png')},
+    'Friends':{uri: require('../assets/icons/friends.png')},
+    'Post':{ uri:require('../assets/icons/addition.png'),size:50},
+    'Donor':{ uri: require('../assets/icons/friends.png')},
+    'Notifications':{ uri: require('../assets/icons/bell-ring.png')},
+    'UserProfile': { uri:require('../assets/icons/user.png')},
+    'SignForPeace':{ uri: require('../assets/icons/world-peace.png')},
+    'Certificate':{ uri: require('../assets/icons/world-peace.png')}
 };
 
 function TabBarIcon({ iconName, focused }: any) {
+
     return (
-        <Image source={iconName} style={{
-            tintColor: focused ? Colors.primary : 'gray', height: focused ? 30 : 30, width
-                : 30, margin: 10
+        <Image source={iconName?.uri} style={{
+            tintColor: focused ? Colors.primary : 'gray', height: iconName?.size?55 :30,
+             width : iconName?.size?55: 30, margin: 10,marginTop:iconName?.size?-25:10,
+             borderRadius:iconName?.size?100:0
         }} />
     );
 };
@@ -79,37 +83,11 @@ function ScholarTabs() {
             { cancelable: false }
         );
     }
-    const deleteUser = () => {
-        Alert.alert(
-            "Account Deletion Confirmation",
-            "Are you sure you want to Delete your account? You will not be able to login again...",
-            [
-                {
-                    text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
-                    style: "cancel"
-                },
-                {
-                    text: "Yes",
-                    onPress: () => {
-                        auth().currentUser?.delete().then(() => {
-                            AsyncStorage.removeItem('userID');
-                            navigation.navigate('Login');
-                        }).catch(error => {
-                            console.error("Account Deletion Error error: ", error);
-                        });
-                    }
-                }
-            ],
-            { cancelable: false }
-        );
-    }
-
+   
     useEffect(()=>{
      getProfile(getUserId())
      .then((profile: any) => {
-        console.log("lo pharro",profile);
-        
+       
         setProfileData(profile);
       })
       .catch(error => {
@@ -139,10 +117,7 @@ function ScholarTabs() {
                 }, headerStyle: {
                     backgroundColor: Colors.lightBackground
                 }
-                , headerRight: () =>
-                    <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                        <Image style={{ height: 25, width: 25, marginRight: 10, tintColor: Colors.primary }} source={icons.settings}></Image>
-                    </TouchableOpacity>
+                ,
             }} />
             {
                 userProfile.signed ?
@@ -150,7 +125,17 @@ function ScholarTabs() {
                     :
                     <Tab.Screen name="SignForPeace" component={SignForPeace} options={{ headerShown: false }} />
             }
+            <Tab.Screen name="Post" component={Post}  />
             <Tab.Screen name="Donor" component={Donor}  />
+            <Tab.Screen name="UserProfile" component={UserProfile}
+            options={{
+                headerRight: () =>
+                    <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                        <Image style={{ height: 25, width: 25, marginRight: 10, tintColor: Colors.primary }} source={icons.settings}></Image>
+                    </TouchableOpacity>
+            }}
+            />
+
             {/* <Tab.Screen name="Friends" component={Friends} options={{ title: "Friends", headerShown: false, tabBarShowLabel: false }} /> */}
             {/* <Tab.Screen name="Notifications" component={Notifications} options={{ headerShown: false, tabBarShowLabel: false }} /> */}
             {/* <Tab.Screen name="UserProfile" component={UserProfile}
